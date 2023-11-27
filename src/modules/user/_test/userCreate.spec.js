@@ -7,7 +7,7 @@ describe('USER CREATE', () => {
     describe('USER CREATE POSITIVE', () => {
 
         it('user creating with correct parameters', (done) => {//6 enter done
-            const arg = {//2 с Appolo Variables параметры для request wothout quotes
+            const arg = {//2 с Appolo Variables параметры для request without quotes
                 "userInput": {
                     firstName: 'firstTestFName',//type names for tests, in Appolo were null
                     lastName: 'firstTestLName'
@@ -23,7 +23,7 @@ describe('USER CREATE', () => {
 }`,
                 variables: arg//param for request (const name)
             }
-            request(graphQLEndpoint)//1 call our cont with endpoint, open page
+            request(graphQLEndpoint)//1 call our const with endpoint, open page
                 .post('/')
                 .send(postData)//4 from response structure
                 .expect(200)//supertest library, not chai
