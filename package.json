@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "PORT=6000 TEST_RUNNER=true mocha ./src/modules/user/_test/userUpdateById.spec.js --timeout 20000 --exit",
+    "test": "cross-env PORT=6000 TEST_RUNNER=true mocha ./src/modules/user/_test/userCreate.spec.js --timeout 20000 --exit",
     "local": "cross-env NODE_ENV=local nodemon --inspect -r dotenv/config -r src/index.js",
-    "start": "nodemon src/index.js"
+    "start": "nodemon src/index.js",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +30,15 @@
     "nodemon": "^3.0.1",
     "supertest": "^6.3.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.23.4",
+    "@babel/core": "^7.23.3",
+    "eslint": "^8.54.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-n": "^16.3.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "prettier": "^3.1.0"
+  },
   "description": ""
 }

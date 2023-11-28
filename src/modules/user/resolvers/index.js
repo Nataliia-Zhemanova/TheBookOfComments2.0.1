@@ -1,24 +1,24 @@
-const Comment = require('../../comment/Comment')
-const userCreate = require('./userCreate')
-const userDeleteById = require('./userDeleteById')
-const usersGetAll = require('./usersGetAll')
-const userGetById = require('./userGetById')
-const userUpdateById = require('./userUpdateById')
+const Comment = require("../../comment/Comment");
+const userCreate = require("./userCreate");
+const userDeleteById = require("./userDeleteById");
+const usersGetAll = require("./usersGetAll");
+const userGetById = require("./userGetById");
+const userUpdateById = require("./userUpdateById");
 
 const userResolvers = {
   User: {
-    comments: async ({comments}) => Comment.find({_id: { $in: comments}})
+    comments: async ({ comments }) => Comment.find({ _id: { $in: comments } }),
   },
   Query: {
     usersGetAll,
-    userGetById
+    userGetById,
   },
 
   Mutation: {
     userCreate,
     userUpdateById,
-    userDeleteById
+    userDeleteById,
   },
-}
+};
 
-module.exports = userResolvers
+module.exports = userResolvers;
