@@ -2,7 +2,7 @@ const request = require('supertest')
 const { expect } = require('chai')
 const graphQLEndpoint = 'http://localhost:5000/graphql'
 
-describe('USER GET ALL', () => {
+describe('USER GET ALL - POSITIVE', () => {
     describe('USER GET ALL - POSITIVE', () => {
         it('user create', (done) => {
             const arg = {

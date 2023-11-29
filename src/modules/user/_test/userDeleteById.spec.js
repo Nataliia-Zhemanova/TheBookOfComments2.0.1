@@ -37,38 +37,32 @@ describe('USER CREATE', () => {
                     done()
                 })
         })
-            it('USER GET BY ID - POSITIVE', (done) => {
-                const arg = {
-                    userId: userIdd
-                }
-                const postData = {
-                    query: `query UserGetById($userId: ID!) {
-  userGetById(userId: $userId) {
-    _id
-    firstName
-    lastName
-  }
+        it('USER DELETE BY ID - POSITIVE', (done) => {
+            const arg = {
+                userId: userIdd
+            }
+            const postData = {
+                query: `mutation UserDeleteById($userId: ID!) {
+  userDeleteById(userId: $userId)
 }`,
-                    variables: arg
-                }
+                variables: arg
+            }
 
-                request(graphQLEndpoint)
-                    .post('/')
-                    .send(postData)
-                    .expect(200)
-                    .end((err, res) => {
-                        if(err) return done(err);
-                        const respData = res.body.data
-                        console.log("resp body user get by id===",respData)
-                        expect(respData.userGetById._id).eq(userIdd)
-                        expect(respData.userGetById.firstName).eq(user.userInput.firstName)
-                        expect(respData.userGetById.lastName).eq(user.userInput.lastName)
-                        done()
-                    })
+            request(graphQLEndpoint)
+                .post('/')
+                .send(postData)
+                .expect(200)
+                .end((err, res) => {
+                    if(err) return done(err);
+                    const respData = res.body.data
+                    console.log("resp body user delete by id===",respData)
+                    expect(respData.userDeleteById).eq(true)
+                    done()
+                })
         })
 
     })
-    describe('USER GET BY ID - NEGATIVE', () => {
+    describe('USER DELETE BY ID - NEGATIVE', () => {
 
     })
 })
