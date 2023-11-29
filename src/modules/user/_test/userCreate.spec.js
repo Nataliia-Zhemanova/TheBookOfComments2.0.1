@@ -3,8 +3,7 @@ const {expect} = require('chai')
 const graphQlEndpoint = 'http://localhost:5000/graphql'
 
 describe('USER CREATE', () => {
-
-    describe('USER CREATE - POSITIVE', () => {
+describe('USER CREATE - POSITIVE', () => {
         it('user create', (done) => {
 
             const arg = {
