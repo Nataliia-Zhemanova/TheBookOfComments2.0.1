@@ -8,8 +8,8 @@ describe('USER CREATE', () =>{
 
             const arg = {
                 userInput: {
-                    firstName: 'firstName1',
-                    lastName: 'lastName1'
+                    firstName: 'firstName3',
+                    lastName: 'lastName3'
                 }
             }
             const postData = {
@@ -20,7 +20,7 @@ describe('USER CREATE', () =>{
                  lastName
                  }
                  }`,
-                veriables: arg
+                variables: arg
             }
             request(graphQLEndpoint)
                 .post('/')
@@ -28,11 +28,11 @@ describe('USER CREATE', () =>{
                 .expect(200)
                 .end((err, res) => {
                     if(err) return done(err);
-                    const respData = res.body
+                    const respData = res.body.data
                     console.log('RESP BODY ===', respData)
-                  /*  expect(respData.userCreate.firstName).eq('firstName1')
-                    expect(respData.userCreate.lastName).eq('lastName1')
-*/
+                    expect(respData.userCreate.firstName).eq('firstName3')
+                    expect(respData.userCreate.lastName).eq('lastName3')
+
                     done()
 
                 })
