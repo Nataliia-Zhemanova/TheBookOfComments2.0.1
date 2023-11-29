@@ -4,14 +4,14 @@ const graphQlEndpoint = 'http://localhost:5000/graphql'
 
 describe('GET USER BY ID', () => {
     describe('GET USER BY ID - POSITIVE', () => {
-        it('user create', (done) => {
-
-            const arg = {
-                userInput: {
-                    firstName: 'firstName',
-                    lastName: 'lastName'
-                }
+        let userId = null;
+        let user = {
+            userInput: {
+                firstName: 'firstName',
+                lastName: 'lastName'
             }
+        }
+        it('user create', (done) => {
 
             const postData = {
                 query: `mutation UserCreate($userInput: UserItems) {
@@ -21,7 +21,7 @@ describe('GET USER BY ID', () => {
     lastName
   }
 }`,
-                variables: arg
+                variables: user
             }
             request(graphQlEndpoint)
                 .post('/')
@@ -30,11 +30,9 @@ describe('GET USER BY ID', () => {
                 .end((err, res) => {
                     if (err) return done(err);
                     const respData = res.body.data
-                    const userId = res.body.data.userCreate._id
-                    console.log("RESP BODY ===", respData)
-                    console.log(userId)
-                    expect(respData.userCreate.firstName).to.eq('firstName')
-                    expect(respData.userCreate.lastName).to.eq('lastName')
+                    userId = res.body.data.userCreate._id
+                    // console.log("RESP BODY ===", respData)
+                    // console.log(userId)
 
                     done()
                 })
@@ -63,12 +61,10 @@ describe('GET USER BY ID', () => {
                 .end((err, res) => {
                     if (err) return done(err);
                     const respData = res.body.data
-                    const userId = res.body.data.userCreate._id
-                    console.log("RESP BODY ===", respData)
-                    console.log(userId)
+                    console.log("RESP BODY GET USER BY ID ===", respData)
                     expect(respData.userGetById._id).eq(userId)
-                    expect(respData.userGetById.firstName).eq(arg.userInput.firstName)
-                    expect(respData.userGetById.lastName).eq(arg.userInput.lastName)
+                    expect(respData.userGetById.firstName).eq(user.userInput.firstName)
+                    expect(respData.userGetById.lastName).eq(user.userInput.lastName)
                     done()
                 })
         })
