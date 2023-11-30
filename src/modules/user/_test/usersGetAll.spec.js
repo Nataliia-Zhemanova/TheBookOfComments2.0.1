@@ -4,13 +4,6 @@ const qraphQLEndpoint = 'http://localhost:5000/graphql'
 
 describe ('USER GET ALL', () => {
     describe ('USER GET ALL - POSITIVE', () => {
-        let userId = null;
-        let user = {
-            userInput: {
-                firstName: 'firstName1',
-                lastName: 'lastName1'
-            }
-        }
         it("user get all", (done) => {
             const arg = {
                 amount: 5,
@@ -33,9 +26,6 @@ describe ('USER GET ALL', () => {
                     if(err) return done(err);
                     const respData = res.body.data
                     console.log('RESP BODY USER GET ALL ===', respData);
-                    // expect(respData.userGetById._id).eq(userId)
-                    // expect(respData.userGetById.firstName).eq(user.userInput.firstName)
-                    // expect(respData.userGetById.lastName).eq(user.userInput.lastName)
                     done()
                 })
         })
