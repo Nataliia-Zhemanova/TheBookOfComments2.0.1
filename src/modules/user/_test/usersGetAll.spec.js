@@ -11,34 +11,9 @@ describe ('USER GET ALL', () => {
                 lastName: 'lastName1'
             }
         }
-        it('user create', (done) => {
-            const postData = {
-                query: `mutation UserCreate($userInput: UserItems) {
-  userCreate(userInput: $userInput) {
-    _id
-    firstName
-    lastName
-  }
-}`,
-                variables:  user,
-            };
-            request(qraphQLEndpoint)
-                .post('/')
-                .send(postData)
-                .expect(200)
-                .end((err, res) => {
-                    if(err) return done(err);
-                    const respData = res.body.data
-                    userId = res.body.data.userCreate._id
-                    console.log('RESP BODY ===', respData);
-                    console.log('USER ID ===', userId);
-                    done()
-                })
-        })
-
         it("user get all", (done) => {
             const arg = {
-                userId: userId,
+                amount: 5,
             };
             const postData = {
                 query: `query UsersGetAll($amount: Int) {
