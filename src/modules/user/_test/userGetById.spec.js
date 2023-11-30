@@ -5,14 +5,14 @@ const qraphQLEndpoint = 'http://localhost:5000/graphql'
 describe ('USER GET BY ID', () => {
     describe ('USER GET BY ID - POSITIVE', () => {
        let userId = null;
+       let user = {
+           userInput: {
+               firstName: 'firstName1',
+               lastName: 'lastName1'
+           }
+       }
         it('user create', (done) => {
-            const arg = {
-                userInput: {
-                    firstName: 'firstName1',
-                    lastName: 'lastName1'
-                }
-            }
-            const postData = {
+                const postData = {
                 query: `mutation UserCreate($userInput: UserItems) {
   userCreate(userInput: $userInput) {
     _id
@@ -20,7 +20,7 @@ describe ('USER GET BY ID', () => {
     lastName
   }
 }`,
-                variables:  arg
+                variables:  user,
             };
             request(qraphQLEndpoint)
                 .post('/')
@@ -59,8 +59,8 @@ describe ('USER GET BY ID', () => {
                 const respData = res.body.data
                 console.log('RESP BODY USER GET BY ID ===', respData);
                 expect(respData.userGetById._id).eq(userId)
-                // expect(respData.userGetById.firstName).eq(arg.userInput.firstName)
-                // expect(respData.userGetById.lastName).eq(arg.userInput.lastName)
+                expect(respData.userGetById.firstName).eq(user.userInput.firstName)
+                expect(respData.userGetById.lastName).eq(user.userInput.lastName)
                 done()
             })
     })

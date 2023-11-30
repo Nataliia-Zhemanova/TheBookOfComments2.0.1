@@ -4,6 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env PORT=6000 TEST_RUNNER=true mocha ./src/modules/user/_test/userGetById.spec.js --timeout 20000 --exit",
+    "test1": "cross-env PORT=6000 TEST_RUNNER=true mocha ./src/modules/user/_test/userCreate.spec.js --timeout 20000 --exit",
+    "test2": "cross-env PORT=6000 TEST_RUNNER=true mocha ./src/modules/user/_test/usersGetAll.spec.js --timeout 20000 --exit",
     "local": "cross-env NODE_ENV=local nodemon --inspect -r dotenv/config -r src/index.js",
     "start": "nodemon src/index.js"
   },
