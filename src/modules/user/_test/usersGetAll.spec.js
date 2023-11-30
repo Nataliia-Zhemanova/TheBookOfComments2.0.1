@@ -2,8 +2,8 @@ const request = require('supertest')
 const {expect} = require ('chai')
 const graphQLEndpoint = 'http://localhost:5000/graphql'
 
-describe('USER CREATE', () => {
-    describe('USER CREATE - POSITIVE', () => {
+describe('USERS GET ALL', () => {
+    describe('USER GET ALL - POSITIVE', () => {
         it('user create', (done) => {
 
             const arg = {
@@ -37,7 +37,7 @@ describe('USER CREATE', () => {
 
                 })
         })
-        it('user get all', (done) => {
+        it('users get all', (done) => {
 
             const arg = {
                 amount: 3,
@@ -71,7 +71,7 @@ describe('USER CREATE', () => {
                 });
         });
     });
-    describe('USER GET BY ID - NEGATIVE', () => {});
+    describe('USERs GET ALL - NEGATIVE', () => {});
 
 })
 
