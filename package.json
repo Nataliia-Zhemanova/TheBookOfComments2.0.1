@@ -7,6 +7,7 @@
     "test2": "cross-env PORT=6000 TEST_RUNNER=true mocha ./src/modules/user/_test/userGetById.spec.js --timeout 20000 --exit",
     "test3": "cross-env PORT=6000 TEST_RUNNER=true mocha ./src/modules/user/_test/userUpdateById.spec.js --timeout 20000 --exit",
     "test4": "cross-env PORT=6000 TEST_RUNNER=true mocha ./src/modules/user/_test/userDeleteById.spec.js --timeout 20000 --exit",
+    "test5": "cross-env PORT=6000 TEST_RUNNER=true mocha ./src/modules/user/_test/usersGetAll.spec.js --timeout 20000 --exit",
     "local": "cross-env NODE_ENV=local nodemon --inspect -r dotenv/config -r src/index.js",
     "start": "nodemon src/index.js"
   },
