@@ -1,6 +1,6 @@
 const { expect } = require('chai')
-const {requestGql} = require("../../helper");
-const { userCreateQuery, userGetIdQuery } = require("../../../queries")
+const { requestGql } = require ('../../helper')
+const { userCreateQuery } = require("../../../queries")
 const { arg } = require("../../../data")
 describe('USER CREATE', () => {
     describe('USER CREATE - POSITIVE', () => {
@@ -18,17 +18,24 @@ describe('USER CREATE', () => {
                     const respData = res.body.data
                     userIdd = res.body.data.userCreate._id
                     console.log("resp body===", respData)
-                    console.log("resp id===", userIdd)
                     done()
                 })
         })
-        it('USER DELETE BY ID - POSITIVE', (done) => {
+        it('USER UPDATE BY ID - POSITIVE', (done) => {
             const arg = {
-                userId: userIdd
+                userInput: {
+                    _id: userIdd,
+                    firstName: "firstName2",
+                    lastName: "lastName2"
+                }
             }
             const postData = {
-                query: `mutation UserDeleteById($userId: ID!) {
-  userDeleteById(userId: $userId)
+                query: `mutation UserUpdateById {
+  userUpdateById {
+    _id
+    firstName
+    lastName
+  }
 }`,
                 variables: arg
             }
@@ -38,14 +45,15 @@ describe('USER CREATE', () => {
                 .end((err, res) => {
                     if(err) return done(err);
                     const respData = res.body.data
-                    console.log("resp body user delete by id===",respData)
-                    expect(respData.userDeleteById).eq(true)
+                    console.log("resp body user update by id===",respData)
+                    //expect(respData.userUpdateById.firstName).eq(user.userInput.firstName)
+                    //expect(respData.userUpdateById.lastName).eq(user.userInput.lastName)
                     done()
                 })
         })
 
     })
-    describe('USER DELETE BY ID - NEGATIVE', () => {
+    describe('USER UPDATE BY ID - NEGATIVE', () => {
 
     })
 })

@@ -1,6 +1,7 @@
 const request = require('supertest')
 const { expect } = require('chai')
 const graphQLEndpoint = 'http://localhost:5000/graphql'
+const { requestGql } = require ('../../helper')
 
 describe('USER GET ALL - POSITIVE', () => {
     describe('USER GET ALL - POSITIVE', () => {
@@ -18,9 +19,7 @@ describe('USER GET ALL - POSITIVE', () => {
 }`,
                 variables: arg
             }
-            request(graphQLEndpoint)
-                .post('/')
-                .send(postData)
+            requestGql(postData)
                 .expect(200)
                 .end((err, res) => {
                     if(err) return done(err);

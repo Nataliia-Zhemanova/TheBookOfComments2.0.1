@@ -1,29 +1,15 @@
-const request = require('supertest')
 const { expect } = require('chai')
-const graphQLEndpoint = 'http://localhost:5000/graphql'
-
+const {requestGql} = require("../../helper");
+const { userCreateQuery } = require("../../../queries")
+const { arg } = require("../../../data")
 describe('USER CREATE', () => {
     describe('USER CREATE - POSITIVE', () => {
         it('user create', (done) => {
-            const arg = {
-                userInput: {
-                    lastName: 'lastName1',
-                    firstName: 'firstName1'
-                }
-            }
             const postData = {
-                query: `mutation UserCreate($userInput: UserItems) {
-  userCreate(userInput: $userInput) {
-    lastName
-    firstName
-    _id
-  }
-}`,
+                query: userCreateQuery,
                 variables: arg
             }
-            request(graphQLEndpoint)
-                .post('/')
-                .send(postData)
+            requestGql(postData)
                 .expect(200)
                 .end((err, res) => {
                     if(err) return done(err);
@@ -36,6 +22,5 @@ describe('USER CREATE', () => {
         })
     })
     describe('USER CREATE - NEGATIVE', () => {
-
     })
 })

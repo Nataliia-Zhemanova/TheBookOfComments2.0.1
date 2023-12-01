@@ -1,32 +1,16 @@
-const request = require('supertest')
 const { expect } = require('chai')
-const graphQLEndpoint = 'http://localhost:5000/graphql'
-
+const {requestGql} = require("../../helper");
+const { userCreateQuery, userGetIdQuery } = require("../../../queries")
+const { arg } = require("../../../data")
 describe('USER CREATE', () => {
     describe('USER CREATE - POSITIVE', () => {
         let userIdd = null
-        const user = {
-            userInput: {
-                lastName: 'lastName1',
-                firstName: 'firstName1'
-            }
-        }
         it('user create', (done) => {
-
             const postData = {
-                query: `mutation UserCreate($userInput: UserItems) {
-  userCreate(userInput: $userInput) {
-    lastName
-    firstName
-    _id
-  }
-}`,
-                variables: user
+                query: userCreateQuery,
+                variables: arg
             }
-
-            request(graphQLEndpoint)
-                .post('/')
-                .send(postData)
+            requestGql(postData)
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
@@ -38,31 +22,22 @@ describe('USER CREATE', () => {
                 })
         })
             it('USER GET BY ID - POSITIVE', (done) => {
-                const arg = {
+                const user = {
                     userId: userIdd
                 }
                 const postData = {
-                    query: `query UserGetById($userId: ID!) {
-  userGetById(userId: $userId) {
-    _id
-    firstName
-    lastName
-  }
-}`,
-                    variables: arg
+                    query: userGetIdQuery,
+                    variables: user
                 }
-
-                request(graphQLEndpoint)
-                    .post('/')
-                    .send(postData)
+                requestGql(postData)
                     .expect(200)
                     .end((err, res) => {
                         if(err) return done(err);
                         const respData = res.body.data
                         console.log("resp body user get by id===",respData)
                         expect(respData.userGetById._id).eq(userIdd)
-                        expect(respData.userGetById.firstName).eq(user.userInput.firstName)
-                        expect(respData.userGetById.lastName).eq(user.userInput.lastName)
+                        expect(respData.userGetById.firstName).eq(arg.userInput.firstName)
+                        expect(respData.userGetById.lastName).eq(arg.userInput.lastName)
                         done()
                     })
         })
