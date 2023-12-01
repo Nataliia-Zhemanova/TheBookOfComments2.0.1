@@ -2,7 +2,7 @@ const {ApolloServer} = require('apollo-server');
 const mongoose = require('mongoose');
 
 //const MONGODB = "mongodb+srv://student:studentAa123@cluster0.uia968n.mongodb.net/?retryWrites=true&w=majority"
-const MONGODB = "mongodb://127.0.0.1:27017/TheBookOfComments_2_0_1"
+const MONGODB = "mongodb+srv://student:studentAa123@cluster0.uia968n.mongodb.net/?retryWrites=true&w=majority"
 
 const typeDefs = require('./graphql/typeDefs')
 const resolvers = require('./graphql/resolvers')
