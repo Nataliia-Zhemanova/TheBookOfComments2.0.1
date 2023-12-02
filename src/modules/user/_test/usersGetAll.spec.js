@@ -26,7 +26,6 @@ describe('USERS GET ALL', () =>{
                     if(err) return done(err);
                     const respData = res.body.data;
                     console.log('RESP BODY ===', respData);
-                    //expect(respData.usersGetAll.length).not.eq(0);
                     expect(respData.usersGetAll.length).eq(arg.amount);
                     done()
                 })

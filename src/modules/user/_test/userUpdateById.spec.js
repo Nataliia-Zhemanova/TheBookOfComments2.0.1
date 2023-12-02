@@ -2,16 +2,16 @@ const request = require('supertest')
 const {expect} = require('chai')
 const graphQLEndpoint = 'http://localhost:5000/graphql'
 
-describe('USER DELETE BY ID', () =>{
-    describe('USER DELETE BY ID - POSITIVE', () => {
+describe('USER UPDATE BY ID', () => {
+    describe('USER UPDATE BY ID - POSITIVE', () => {
         let userId = null;
         let user = {
             userInput: {
-                firstName: 'firstName4',
-                lastName: 'lastName4'
+                firstName: 'firstName6',
+                lastName: 'lastName6'
             }
         }
-        it('user create', (done) =>{
+        it('user create', (done) => {
             const postData = {
                 query: `mutation UserCreate($userInput: UserItems) {
                 userCreate(userInput: $userInput) {
@@ -27,23 +27,31 @@ describe('USER DELETE BY ID', () =>{
                 .send(postData)
                 .expect(200)
                 .end((err, res) => {
-                    if(err) return done(err);
+                    if (err) return done(err);
                     const respData = res.body.data;
                     userId = res.body.data.userCreate._id;
-                    console.log('RESP BODY ===', respData)
+                    console.log('RESP BODY ===', respData);
                     console.log('USER ID ===', userId);
+
                     done()
                 })
         })
-
-        it('user delete by id', (done) => {
+        it('user update by id', (done) => {
             const arg = {
-                userId: userId,
+                "userInput": {
+                    "_id": userId,
+                    "firstName": 'firstName10',
+                    "lastName": 'lastName10'
+                }
             };
             const postData = {
-                query: `mutation Mutation($userId: ID!) {
-                       userDeleteById(userId: $userId)
-                       }`,
+                query: `mutation Mutation($userInput: UserFields) {
+                       userUpdateById(userInput: $userInput) {
+                       _id
+                       firstName
+                       lastName
+                       }
+                }`,
                 variables: arg
             }
             request(graphQLEndpoint)
@@ -51,14 +59,19 @@ describe('USER DELETE BY ID', () =>{
                 .send(postData)
                 .expect(200)
                 .end((err, res) => {
-                    if(err) return done(err);
+                    if (err) return done(err);
                     const respData = res.body.data;
-                    console.log('USER DELETE BY ID ===', respData);
-                    expect(respData.userDeleteById).to.be.true;
+                    console.log('RESP BODY USER GET BY ID ===', respData);
+                    expect(respData.userGetById._id).eq(userId)
+                    expect(respData.userGetById.firstName).eq(user.userInput.firstName)
+                    expect(respData.userGetById.lastName).eq(user.userInput.lastName)
+
                     done()
+
                 })
         })
     })
-    describe('USER DELETE BY ID - NEGATIVE', () =>{
+    describe('USER UPDATE BY ID - NEGATIVE', () => {
+
     })
 })
