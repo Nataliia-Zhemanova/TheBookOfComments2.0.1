@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "PORT=6000 TEST_RUNNER=true mocha ./src/modules/user/_test/userUpdateById.spec.js --timeout 20000 --exit",
+    "test": "cross-env PORT=6000 TEST_RUNNER=true mocha ./src/modules/user/_tests/userCreate.spec.js --timeout 20000 --exit",
     "local": "cross-env NODE_ENV=local nodemon --inspect -r dotenv/config -r src/index.js",
     "start": "nodemon src/index.js"
   },
@@ -16,7 +16,6 @@
     "@graphql-tools/schema": "^10.0.0",
     "apollo-server": "^3.13.0",
     "chai": "^4.3.10",
-    "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
     "graphql": "^16.8.1",
     "graphql-shield": "^7.6.5",
@@ -29,6 +28,8 @@
     "nodemon": "^3.0.1",
     "supertest": "^6.3.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  },
   "description": ""
 }
