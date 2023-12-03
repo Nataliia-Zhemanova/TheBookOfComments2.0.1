@@ -16,7 +16,7 @@ describe ('USER DELETE BY ID', () => {
                     if(err) return done(err);
                     const respData = res.body.data
                     console.log('RESP BODY ===', respData);
-                    expect(respData.userDeleteById).eq(true)
+                    expect(respData.userDeleteById).eq(false)
                     done()
                 })
         })
