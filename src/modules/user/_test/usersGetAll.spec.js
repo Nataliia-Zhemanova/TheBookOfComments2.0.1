@@ -10,7 +10,7 @@ describe ('USER GET ALL', () => {
     describe ('USER GET ALL - POSITIVE', () => {
         it("user get all", (done) => {
             const arg = {
-                amount: 5,
+                amount: 0,
             };
             const postData = {
                 query: userGetAllQ,

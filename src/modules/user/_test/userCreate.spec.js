@@ -27,7 +27,8 @@ describe ('USER CREATE', () => {
                 variables:  arg
             }
 
-            requestGql(postData)            // request(qraphQLEndpoint)
+            requestGql(postData)
+                                            // request(qraphQLEndpoint)
                                             // .post('/')
                                             // .send(postData)
                                             // Убрали потому что импортировали
