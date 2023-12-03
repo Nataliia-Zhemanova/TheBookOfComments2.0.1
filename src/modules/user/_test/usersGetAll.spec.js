@@ -1,6 +1,10 @@
-const request = require ("supertest")
+// const request = require ("supertest")
+// const qraphQLEndpoint = 'http://localhost:5000/graphql'
+
 const {expect} = require ('chai')
-const qraphQLEndpoint = 'http://localhost:5000/graphql'
+const {requestGql} = require('../../helper')
+const {userCreateMutation, userGetByIdQ, userGetAllQ} = require('./queries')
+const {arg} = require('./data')
 
 describe ('USER GET ALL', () => {
     describe ('USER GET ALL - POSITIVE', () => {
@@ -9,18 +13,20 @@ describe ('USER GET ALL', () => {
                 amount: 5,
             };
             const postData = {
-                query: `query UsersGetAll($amount: Int) {
-  usersGetAll(amount: $amount) {
-    _id
-    firstName
-    lastName
-  }
-}`,
+                query: userGetAllQ,
+                                //  query: `query UsersGetAll($amount: Int) {
+                                //  usersGetAll(amount: $amount) {
+                                //  _id
+                                //  firstName
+                                //  lastName
+                                //   }
+                                // }`,
                 variables:  arg
             };
-            request(qraphQLEndpoint)
-                .post('/')
-                .send(postData)
+            requestGql(postData)
+                                // request(qraphQLEndpoint)
+                                //     .post('/')
+                                //     .send(postData)
                 .expect(200)
                 .end((err, res) => {
                     if(err) return done(err);

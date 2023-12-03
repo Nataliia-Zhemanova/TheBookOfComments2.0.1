@@ -1,30 +1,39 @@
-const request = require ("supertest")
+// const qraphQLEndpoint = 'http://localhost:5000/graphql'
+// const request = require ("supertest")
+// Убрали потому что импортировали
+
 const {expect} = require ('chai')
-const qraphQLEndpoint = 'http://localhost:5000/graphql'
+const {requestGql} = require('../../helper')
+const {userCreateMutation, userGetByIdQ} = require('./queries')
+const {arg} = require('./data')
 
 describe ('USER GET BY ID', () => {
     describe ('USER GET BY ID - POSITIVE', () => {
        let userId = null;
-       let user = {
-           userInput: {
-               firstName: 'firstName1',
-               lastName: 'lastName1'
-           }
-       }
+                                               // let user = {
+                                               // userInput: {
+                                               // firstName: 'firstName1',
+                                               // lastName: 'lastName1'
+                                               // }
+                                               // }
         it('user create', (done) => {
                 const postData = {
-                query: `mutation UserCreate($userInput: UserItems) {
-  userCreate(userInput: $userInput) {
-    _id
-    firstName
-    lastName
-  }
-}`,
-                variables:  user,
+                    query: userCreateMutation,
+                                                // query: `mutation UserCreate($userInput: UserItems) {
+                                                // userCreate(userInput: $userInput) {
+                                                // _id
+                                                // firstName
+                                                // lastName
+                                                //   }
+                                                // }` Убрали потому что импортировали
+                variables:  arg,
             };
-            request(qraphQLEndpoint)
-                .post('/')
-                .send(postData)
+                requestGql(postData)
+                                                // request(qraphQLEndpoint)
+                                                // .post('/')
+                                                // .send(postData)
+                                                // Убрали потому что импортировали
+
                 .expect(200)
                 .end((err, res) => {
                     if(err) return done(err);
@@ -37,30 +46,32 @@ describe ('USER GET BY ID', () => {
         })
 
         it("user get by id", (done) => {
-        const arg = {
+        const userGet = {
             userId: userId,
         };
         const postData = {
-            query: `query UserGetById($userId: ID!) {
-  userGetById(userId: $userId) {
-    _id
-    firstName
-    lastName
-  }
-}`,
-            variables:  arg
+            query: userGetByIdQ,
+                                                // query: `query UserGetById($userId: ID!) {
+                                                // userGetById(userId: $userId) {
+                                                // _id
+                                                // firstName
+                                                // lastName
+                                                // }
+                                                // }`,
+            variables:  userGet
         };
-        request(qraphQLEndpoint)
-            .post('/')
-            .send(postData)
+            requestGql(postData)                // request(qraphQLEndpoint)
+                                                // .post('/')
+                                                // .send(postData)
+                                                // Убрали потому что импортировали
             .expect(200)
             .end((err, res) => {
                 if(err) return done(err);
                 const respData = res.body.data
                 console.log('RESP BODY USER GET BY ID ===', respData);
                 expect(respData.userGetById._id).eq(userId)
-                expect(respData.userGetById.firstName).eq(user.userInput.firstName)
-                expect(respData.userGetById.lastName).eq(user.userInput.lastName)
+                expect(respData.userGetById.firstName).eq(arg.userInput.firstName)
+                expect(respData.userGetById.lastName).eq(arg.userInput.lastName)
                 done()
             })
     })
