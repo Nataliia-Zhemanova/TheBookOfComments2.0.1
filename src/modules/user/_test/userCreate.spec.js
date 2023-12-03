@@ -3,7 +3,7 @@
 
 const {expect} = require ('chai')
 const {requestGql} = require('../../helper')
-const {userCreateMutation, arg} = require('./queries')
+const {userCreateMutation} = require('./queries')
 const {arg} = require('./data')
 describe ('USER CREATE', () => {
     describe ('USER CREATE - POSITIVE', () => {
