@@ -1,30 +1,17 @@
-const request = require('supertest')
 const {expect} = require('chai')
-const graphQLEndpoint = 'http://localhost:5000/graphql'
+const{requestGql} = require('../../helper');
+const{userCreateM, userUpdateByIdM} = require('./queries');
+const{arg} = require('./data');
 
 describe('USER UPDATE BY ID', () => {
     describe('USER UPDATE BY ID - POSITIVE', () => {
         let userId = null;
-        let user = {
-            userInput: {
-                firstName: 'firstName6',
-                lastName: 'lastName6'
-            }
-        }
         it('user create', (done) => {
             const postData = {
-                query: `mutation UserCreate($userInput: UserItems) {
-                userCreate(userInput: $userInput) {
-                _id
-                 firstName
-                 lastName
-                 }
-                 }`,
-                variables: user
+                query: userCreateM,
+                variables: arg
             }
-            request(graphQLEndpoint)
-                .post('/')
-                .send(postData)
+            requestGql(postData)
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
@@ -37,26 +24,18 @@ describe('USER UPDATE BY ID', () => {
                 })
         })
         it('user update by id', (done) => {
-            const arg = {
-                "userInput": {
-                    "_id": userId,
-                    "firstName": 'firstName10',
-                    "lastName": 'lastName10'
+            const user = {
+                userInput: {
+                    _id: userId,
+                    firstName: 'firstName10',
+                    lastName: 'lastName10'
                 }
             };
             const postData = {
-                query: `mutation Mutation($userInput: UserFields) {
-                       userUpdateById(userInput: $userInput) {
-                       _id
-                       firstName
-                       lastName
-                       }
-                }`,
-                variables: arg
+                query: userUpdateByIdM,
+                variables: user
             }
-            request(graphQLEndpoint)
-                .post('/')
-                .send(postData)
+            requestGql(postData)
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);

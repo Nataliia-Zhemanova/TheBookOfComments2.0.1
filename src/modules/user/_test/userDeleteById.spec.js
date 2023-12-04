@@ -1,30 +1,16 @@
-const request = require('supertest')
 const {expect} = require('chai')
-const graphQLEndpoint = 'http://localhost:5000/graphql'
-
+const {arg} = require("./data");
+const{userCreateM, userDeleteByIdM} = require('./queries');
+const {requestGql} = require("../../helper");
 describe('USER DELETE BY ID', () =>{
     describe('USER DELETE BY ID - POSITIVE', () => {
         let userId = null;
-        let user = {
-            userInput: {
-                firstName: 'firstName4',
-                lastName: 'lastName4'
-            }
-        }
         it('user create', (done) =>{
             const postData = {
-                query: `mutation UserCreate($userInput: UserItems) {
-                userCreate(userInput: $userInput) {
-                _id
-                 firstName
-                 lastName
-                 }
-                 }`,
-                variables: user
+                query: userCreateM,
+                variables: arg,
             }
-            request(graphQLEndpoint)
-                .post('/')
-                .send(postData)
+            requestGql(postData)
                 .expect(200)
                 .end((err, res) => {
                     if(err) return done(err);
@@ -37,18 +23,14 @@ describe('USER DELETE BY ID', () =>{
         })
 
         it('user delete by id', (done) => {
-            const arg = {
+            const user = {
                 userId: userId,
             };
             const postData = {
-                query: `mutation Mutation($userId: ID!) {
-                       userDeleteById(userId: $userId)
-                       }`,
-                variables: arg
+                query: userDeleteByIdM,
+                variables: user
             }
-            request(graphQLEndpoint)
-                .post('/')
-                .send(postData)
+            requestGql(postData)
                 .expect(200)
                 .end((err, res) => {
                     if(err) return done(err);
