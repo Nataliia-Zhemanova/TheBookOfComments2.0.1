@@ -4,15 +4,15 @@ const graphQLEndpoint = 'http://localhost:5000/graphql'
 
 describe('create user', () => {
     describe('positive', () => {
-        let res
-        it('verify user created successfully', async() => {
-            const arg = {
+        let res, resBody, createArg
+        before(async() => {
+            createArg = {
                 "userInput": {
                     "firstName": 'testName',
                     "lastName": 'testSurname'
                 }
             }
-            const postData = {
+            const postCreateData = {
                 query: `mutation UserCreate($userInput: UserItems) {
                     userCreate(userInput: $userInput) {
                           _id
@@ -20,20 +20,23 @@ describe('create user', () => {
                            lastName
                     }
                 }`,
-                variables: arg
+                variables: createArg
             }
-
             res = await request(graphQLEndpoint)
                 .post('/')
-                .send(postData)
+                .send(postCreateData)
                 .expect(200)
-                    const resBody = res.body.data.userCreate
-                    console.log("Response Body = ", resBody )
-                    expect(resBody.firstName).to.eq(arg.userInput.firstName)
-                    expect(resBody.lastName).to.eq(arg.userInput.lastName)
-
+            resBody = res.body.data.userCreate
+            console.log(resBody)
+        })
+        it('verify created user first name', async() => {
+            expect(resBody.firstName).to.eq(createArg.userInput.firstName)
+        });
+        it('verify created user last name', async() => {
+            expect(resBody.lastName).to.eq(createArg.userInput.lastName)
         });
     });
+
     describe('negative', () => {
         // it('', () => {
         //
