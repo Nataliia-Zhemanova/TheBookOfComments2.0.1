@@ -7,8 +7,8 @@ describe('user update by id', () => {
         let res, userId, userFirstName, userLastName
         const user = {
             "userInput": {
-                "firstName": 'testName1',
-                "lastName": 'testSurname1'
+                "firstName": 'testName33',
+                "lastName": 'testSurname33'
             }
         }
         const postData = {
@@ -33,10 +33,10 @@ describe('user update by id', () => {
 
         it('verify user updated successfully', async() => {
             const arg = {
-                "userInput": {
-                    _id: userId,
-                    "firstName": "testName22",
-                    "lastName": "testSurname22"
+                userInput: {
+                   _id: userId,
+                   firstName: 'testName44',
+                   lastName: 'testSurname44'
                 }
             }
             const postData = {
