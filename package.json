@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env PORT=6000 TEST_RUNNER=true mocha ./src/modules/user/_tests/userCreate.spec.js --timeout 20000 --exit",
+    "test": "cross-env PORT=6000 TEST_RUNNER=true mocha ./src/modules/user/_tests/*.spec.js --timeout 20000 --exit",
     "local": "cross-env NODE_ENV=local nodemon --inspect -r dotenv/config -r src/index.js",
     "start": "nodemon src/index.js"
   },
