@@ -4,14 +4,14 @@ const graphQLEndpoint = 'http://localhost:5000/graphql'
 
 describe('user update by id', () => {
     describe('user update by id - positive', () => {
-        let res, userId, userFirstName, userLastName
-        const user = {
+        let res, userId, userFirstName, userLastName, updateArg, resBody
+        const createArg = {
             "userInput": {
                 "firstName": 'testName33',
                 "lastName": 'testSurname33'
             }
         }
-        const postData = {
+        const postCreateData = {
             query: `mutation UserCreate($userInput: UserItems) {
                     userCreate(userInput: $userInput) {
                           _id
@@ -19,27 +19,25 @@ describe('user update by id', () => {
                            lastName
                     }
                 }`,
-            variables: user
+            variables: createArg
         }
         before(async() => {
             res = await request(graphQLEndpoint)
                 .post('/')
-                .send(postData)
+                .send(postCreateData)
                 .expect(200)
             userId  = res.body.data.userCreate._id
             userFirstName = res.body.data.userCreate.firstName
             userLastName = res.body.data.userCreate.lastName
-        });
 
-        it('verify user updated successfully', async() => {
-            const arg = {
+            const updateArg = {
                 userInput: {
-                   _id: userId,
-                   firstName: 'testName44',
-                   lastName: 'testSurname44'
+                    _id: userId,
+                    firstName: 'testName44',
+                    lastName: 'testSurname44'
                 }
             }
-            const postData = {
+            const postUpdateData = {
                 query: `mutation UserUpdateById($userInput: UserFields) {
                           userUpdateById(userInput: $userInput) {
                             _id
@@ -47,15 +45,22 @@ describe('user update by id', () => {
                             lastName
                           }
                         }`,
-                variables: arg
+                variables: updateArg
             }
 
             res = await request(graphQLEndpoint)
                 .post('/')
-                .send(postData)
+                .send(postUpdateData)
                 .expect(200)
-            const resBody = res.body.data
-            console.log(resBody)
+            const resBody = res.body.data.userUpdateById
+            console.log('Update user response = ', resBody)
+        });
+
+        it('verify user updated successfully', async() => {
+            expect(resBody.firstName).eq(updateArg.firstName)
+        });
+        it('verify user updated successfully', async() => {
+            expect(resBody.lastName).eq(updateArg.lastName)
 
         });
     });
