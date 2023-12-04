@@ -1,32 +1,25 @@
 const request = require('supertest')
 const {expect} = require('chai')
 const graphQLEndpoint = 'http://localhost:5000/graphql'
+const {requestGql} = require("../../helper");
+const { deleteUerQuery, userDeleteQuery} = require('./queries')
 
 describe('delete user', () => {
     describe('delete user - positive', () => {
         let res, userId
-        const user = {
+        const createUserArgs = {
             "userInput": {
                 "firstName": 'testName1',
                 "lastName": 'testSurname1'
             }
         }
-        const postCreatetData = {
-            query: `mutation UserCreate($userInput: UserItems) {
-                    userCreate(userInput: $userInput) {
-                          _id
-                           firstName
-                           lastName
-                    }
-                }`,
-            variables: user
+        const postCreateData = {
+            query: userDeleteQuery,
+            variables: createUserArgs
         }
 
         before(async() => {
-            res = await request(graphQLEndpoint)
-                .post('/')
-                .send(postCreatetData)
-                .expect(200)
+            res = await requestGql(postCreateData)
             userId  = res.body.data.userCreate._id
         });
 
