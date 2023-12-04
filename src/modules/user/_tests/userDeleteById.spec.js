@@ -31,21 +31,23 @@ describe('delete user', () => {
         });
 
         it('verify user delete successfully', async() => {
+            console.log(userId)
             const arg = {
                 userId: userId
             }
             const postDeleteData = {
                 query: `mutation UserDeleteById($userId: ID!) {
                   userDeleteById(userId: $userId)
-                }`
+                }`,
+                variables: arg
             }
 
             res = await request(graphQLEndpoint)
                 .post('/')
                 .send(postDeleteData)
                 .expect(200)
-            const resBody = res.body.data
-            console.log(resBody)
+            const resBody = res.body.data.userDeleteById
+            expect(resBody).eq(true)
         });
     });
 
