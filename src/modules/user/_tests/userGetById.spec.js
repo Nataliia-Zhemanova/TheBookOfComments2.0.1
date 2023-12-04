@@ -3,7 +3,7 @@ const {expect} = require('chai')
 const graphQLEndpoint = 'http://localhost:5000/graphql'
 
 describe('get user by id', () => {
-    let res
+    let res, resData, userId
     describe('get user by id - positive', () => {
         const user = {
             "userInput": {
@@ -11,9 +11,8 @@ describe('get user by id', () => {
                 "lastName": 'testSurname'
             }
         }
-        let userId
-        it('user create positive', async() => {
-            const postData = {
+        before(async() => {
+            const postCreateData = {
                 query: `mutation UserCreate($userInput: UserItems) {
                     userCreate(userInput: $userInput) {
                           _id
@@ -25,19 +24,16 @@ describe('get user by id', () => {
             }
             res = await request(graphQLEndpoint)
                 .post('/')
-                .send(postData)
+                .send(postCreateData)
                 .expect(200)
 
                 userId = res.body.data.userCreate._id
                 console.log('User Id = ', userId)
-                expect(userId).not.to.be.empty
-                expect(userId).to.be.a('string')
-        });
-        it('user get by id', async() => {
+
             const arg = {
                 userId: userId
             }
-            const postData = {
+            const postGetData = {
                 query: `query UserGetById($userId: ID!) {
                           userGetById(userId: $userId) {
                             _id
@@ -49,13 +45,19 @@ describe('get user by id', () => {
             }
             res = await request(graphQLEndpoint)
                 .post('/')
-                .send(postData)
+                .send(postGetData)
                 .expect(200)
-                const resData = res.body.data.userGetById
-                console.log('response Get user by id = ', resData)
+            resData = res.body.data.userGetById
+        });
+        it('verify user id', async() => {
                 expect(resData._id).to.eq(userId)
-                expect(resData.firstName).to.eq(user.userInput.firstName)
-                expect(resData.lastName).to.eq(user.userInput.lastName)
+
+        });
+        it('verify user first name', async() => {
+            expect(resData.firstName).to.eq(user.userInput.firstName)
+        });
+        it('verify user last name', async() => {
+            expect(resData.lastName).to.eq(user.userInput.lastName)
         });
     })
 })
