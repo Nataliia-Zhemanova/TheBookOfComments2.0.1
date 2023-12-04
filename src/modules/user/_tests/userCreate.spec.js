@@ -1,6 +1,4 @@
-const request = require('supertest')
 const {expect} = require('chai')
-const graphQLEndpoint = 'http://localhost:5000/graphql'
 const { userCreateQuery, } = require('./queries')
 const { createUserArgs, } = require('./args')
 const {requestGql} = require("../../helper");
