@@ -4,7 +4,8 @@ const graphQLEndpoint = 'http://localhost:5000/graphql'
 
 describe('create user', () => {
     describe('positive', () => {
-        it('verify user created successfully', (done) => {
+        let res
+        it('verify user created successfully', async() => {
             const arg = {
                 "userInput": {
                     "firstName": 'testName',
@@ -22,19 +23,15 @@ describe('create user', () => {
                 variables: arg
             }
 
-            request(graphQLEndpoint)
+            res = await request(graphQLEndpoint)
                 .post('/')
                 .send(postData)
                 .expect(200)
-                .end((err, res) => {
-                    if (err) return done(err);
                     const resBody = res.body.data.userCreate
                     console.log("Response Body = ", resBody )
                     expect(resBody.firstName).to.eq(arg.userInput.firstName)
                     expect(resBody.lastName).to.eq(arg.userInput.lastName)
 
-                    done()
-                })
         });
     });
     describe('negative', () => {
