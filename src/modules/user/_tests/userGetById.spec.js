@@ -1,5 +1,6 @@
 const request = require('supertest')
 const {expect} = require('chai')
+const {requestGql} = require("../../helper");
 const graphQLEndpoint = 'http://localhost:5000/graphql'
 
 describe('get user by id', () => {
@@ -22,10 +23,7 @@ describe('get user by id', () => {
                 }`,
                 variables: user
             }
-            res = await request(graphQLEndpoint)
-                .post('/')
-                .send(postCreateData)
-                .expect(200)
+            res = await requestGql(postCreateData)
 
                 userId = res.body.data.userCreate._id
                 console.log('User Id = ', userId)
@@ -43,10 +41,7 @@ describe('get user by id', () => {
                         }`,
                 variables: arg
             }
-            res = await request(graphQLEndpoint)
-                .post('/')
-                .send(postGetData)
-                .expect(200)
+            res = await requestGql(postGetData)
             resData = res.body.data.userGetById
         });
         it('verify user id', async() => {
