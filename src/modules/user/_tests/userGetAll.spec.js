@@ -30,7 +30,7 @@ describe('get all users', () => {
             userId  = res.body.data.userCreate._id
                 });
 
-    it('get all users', async() => {
+    it('verify all users length', async() => {
         const arg = {
             amount: 4
         }

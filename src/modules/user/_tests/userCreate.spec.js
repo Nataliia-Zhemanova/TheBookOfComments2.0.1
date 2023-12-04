@@ -27,7 +27,6 @@ describe('create user', () => {
                 .send(postCreateData)
                 .expect(200)
             resBody = res.body.data.userCreate
-            console.log(resBody)
         })
         it('verify created user first name', async() => {
             expect(resBody.firstName).to.eq(createArg.userInput.firstName)
