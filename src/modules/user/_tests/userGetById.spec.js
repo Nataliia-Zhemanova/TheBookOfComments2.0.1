@@ -1,6 +1,7 @@
 const request = require('supertest')
 const {expect} = require('chai')
 const {requestGql} = require("../../helper");
+const {userGetById} = require("./queries");
 const graphQLEndpoint = 'http://localhost:5000/graphql'
 
 describe('get user by id', () => {
@@ -14,13 +15,7 @@ describe('get user by id', () => {
         }
         before(async() => {
             const postCreateData = {
-                query: `mutation UserCreate($userInput: UserItems) {
-                    userCreate(userInput: $userInput) {
-                          _id
-                           firstName
-                           lastName
-                    }
-                }`,
+                query: userGetById,
                 variables: user
             }
             res = await requestGql(postCreateData)
