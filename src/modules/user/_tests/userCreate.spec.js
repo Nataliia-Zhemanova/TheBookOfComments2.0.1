@@ -29,17 +29,17 @@ describe('create user', () => {
                 .end((err, res) => {
                     if (err) return done(err);
                     const resBody = res.body.data.userCreate
-                    console.log("Response Body = ", res.body.data)
-                    expect(resBody.firstName).to.eq('testName')
-                    expect(resBody.lastName).to.eq('testSurname')
+                    console.log("Response Body = ", resBody )
+                    expect(resBody.firstName).to.eq(arg.userInput.firstName)
+                    expect(resBody.lastName).to.eq(arg.userInput.lastName)
 
                     done()
                 })
         });
     });
     describe('negative', () => {
-        it('', () => {
-
-        });
+        // it('', () => {
+        //
+        // });
     });
 });
