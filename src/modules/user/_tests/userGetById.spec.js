@@ -1,24 +1,24 @@
 const request = require('supertest')
 const {expect} = require('chai')
 const {requestGql} = require("../../helper");
-const {userGetById} = require("./queries");
+const {userCreateQuery, userGetById} = require("./queries");
+const {createUserArgs} = require('./args')
 const graphQLEndpoint = 'http://localhost:5000/graphql'
+const User = require('../User')
 
 describe('get user by id', () => {
     let res, resData, userId
     describe('get user by id - positive', () => {
-        const user = {
-            "userInput": {
-                "firstName": 'testName',
-                "lastName": 'testSurname'
-            }
-        }
+        before('delete all users', (done)=>{
+            User.deleteMany({})
+            return done()
+        })
         before(async() => {
-            const postCreateData = {
-                query: userGetById,
-                variables: user
+            const postUserCreateData = {
+                query: userCreateQuery,
+                variables: createUserArgs
             }
-            res = await requestGql(postCreateData)
+            res = await requestGql(postUserCreateData)
 
                 userId = res.body.data.userCreate._id
                 console.log('User Id = ', userId)
@@ -38,16 +38,20 @@ describe('get user by id', () => {
             }
             res = await requestGql(postGetData)
             resData = res.body.data.userGetById
+            console.log(resData)
         });
         it('verify user id', async() => {
                 expect(resData._id).to.eq(userId)
 
         });
         it('verify user first name', async() => {
-            expect(resData.firstName).to.eq(user.userInput.firstName)
+            expect(resData.firstName).to.eq(createUserArgs.userInput.firstName)
         });
         it('verify user last name', async() => {
-            expect(resData.lastName).to.eq(user.userInput.lastName)
+            expect(resData.lastName).to.eq(createUserArgs.userInput.lastName)
         });
     })
+    describe('get user by id - negative', () => {
+
+    });
 })

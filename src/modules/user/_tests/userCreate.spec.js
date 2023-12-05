@@ -5,7 +5,7 @@ const {requestGql} = require("../../helper");
 
 describe('create user', () => {
     describe('positive', () => {
-        let res, resBody, createArg
+        let res, resBody
         before(async() => {
             const postCreateData = {
                 query: userCreateQuery,
