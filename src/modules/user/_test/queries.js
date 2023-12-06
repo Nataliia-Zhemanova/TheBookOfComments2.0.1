@@ -14,4 +14,17 @@ const userGetByIdQ = `query UserGetById($userId: ID!) {
                 }
             }`
 
-module.exports = { userCreateM, userGetByIdQ }
+const usersGetAllQ = `query UsersGetAll($amount: Int) {
+  usersGetAll(amount: $amount) {
+    _id
+    firstName
+    lastName
+  }
+            }`
+
+const userDeleteByIdM = `mutation UserDeleteById($userId: ID!) {
+  userDeleteById(userId: $userId)
+}`
+
+
+module.exports = { userCreateM, userGetByIdQ, usersGetAllQ, userDeleteByIdM }

@@ -6,5 +6,12 @@ const arg = {
         lastName: faker.name.lastName(),
     },
 };
+const arg2  = {
+    amount: 3,
+};
 
-module.exports = { arg }
+
+
+
+module.exports = { arg, arg2 }
+
