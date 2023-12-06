@@ -3,7 +3,7 @@
 
 const {expect} = require ('chai')
 const {requestGql} = require('../../helper')
-const {userCreateMutation, userGetByIdQ, userGetAllQ} = require('./queries')
+const {userGetAllQ} = require('./queries')
 const {arg} = require('./data')
 
 describe ('USER GET ALL', () => {
