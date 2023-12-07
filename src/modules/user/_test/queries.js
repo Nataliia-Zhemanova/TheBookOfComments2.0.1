@@ -7,12 +7,12 @@ const userCreateM = `mutation UserCreate($userInput: UserItems) {
 }`
 
 const userGetByIdQ = `query UserGetById($userId: ID!) {
-                userGetById(userId: $userId) {
-                    _id
-                    lastName
-                    firstName
-                }
-            }`
+  userGetById(userId: $userId) {
+    _id
+    lastName
+    firstName
+    }
+}`
 
 const usersGetAllQ = `query UsersGetAll($amount: Int) {
   usersGetAll(amount: $amount) {
@@ -20,11 +20,18 @@ const usersGetAllQ = `query UsersGetAll($amount: Int) {
     firstName
     lastName
   }
-            }`
+}`
 
 const userDeleteByIdM = `mutation UserDeleteById($userId: ID!) {
   userDeleteById(userId: $userId)
 }`
 
+const userUpdateByIdM = `mutation UserUpdateById($userInput: UserFields) {
+   userUpdateById(userInput: $userInput) {
+     _id
+     lastName
+     firstName
+     }
+}`
 
-module.exports = { userCreateM, userGetByIdQ, usersGetAllQ, userDeleteByIdM }
+module.exports = { userCreateM, userGetByIdQ, usersGetAllQ, userDeleteByIdM, userUpdateByIdM }

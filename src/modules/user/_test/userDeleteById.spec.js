@@ -86,7 +86,7 @@ const User = require('../User')
 describe('USER DELETE BY ID', () => {
     describe('USER DELETE BY ID - POSITIVE', () => {
 
-        let userId = null;
+        //let userId = null;
 
         before('user delete all', (done) => {
             User.deleteMany({})
