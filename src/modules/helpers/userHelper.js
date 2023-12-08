@@ -1,6 +1,6 @@
 const {requestGql} = require('./generalHelper')
-const {createUserArgs} = require('./args')
-const {userCreateQuery} = require('./queries')
+const {createUserArgs, userGetAllArgs} = require('./args')
+const {userCreateQuery, userGetAll, userGetAllQuery} = require('./queries')
 
 
 function createUser(){
@@ -11,5 +11,13 @@ function createUser(){
    return requestGql(postData)
 }
 
+function getAllUsers(){
+    const postData = {
+        query: userGetAllQuery,
+        variables: userGetAllArgs
+    }
+    return requestGql(postData)
+}
 
-module.exports = {createUser}
+
+module.exports = {createUser, getAllUsers}

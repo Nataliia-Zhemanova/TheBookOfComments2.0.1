@@ -16,7 +16,7 @@ const userDeleteQuery = `mutation UserCreate($userInput: UserItems) {
                     }
                 }`
 
-const userGetById = `mutation UserCreate($userInput: UserItems) {
+const userGetByIdQuery = `mutation UserCreate($userInput: UserItems) {
                     userCreate(userInput: $userInput) {
                           _id
                            firstName
@@ -24,4 +24,11 @@ const userGetById = `mutation UserCreate($userInput: UserItems) {
                     }
                 }`
 
-    module.exports = { userCreateQuery, userDeleteQuery, userGetById }
+const userGetAllQuery = `query UsersGetAll($amount: Int) {
+                      usersGetAll(amount: $amount) {
+                        _id
+                        firstName
+                        lastName
+                      }
+                    }`
+    module.exports = { userCreateQuery, userDeleteQuery, userGetByIdQuery, userGetAllQuery }

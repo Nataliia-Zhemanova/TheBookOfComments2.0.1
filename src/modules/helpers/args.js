@@ -7,8 +7,12 @@ const createUserArgs = {
     }
 }
 
+const userGetAllArgs = {
+    amount: 4
+}
+
 // const getUserByIdArgs = {
 //     userId: userId
 // }
 
-    module.exports = { createUserArgs }
+    module.exports = { createUserArgs, userGetAllArgs }
