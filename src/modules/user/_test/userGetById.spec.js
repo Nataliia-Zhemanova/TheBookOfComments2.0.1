@@ -13,8 +13,6 @@ describe('USER GET BY ID', () => {
         before('user delete all', (done) => {
             User.deleteMany({})
             return done()
-
-
         })
 
         before('user create', (done) => {
@@ -61,14 +59,15 @@ describe('USER GET BY ID', () => {
         });
     })
 
+
+
+
     describe('USER GET BY ID  - NEGATIVE', () => {
         let userId = null;
 
         before('user delete all', (done) => {
             User.deleteMany({})
             return done()
-
-
         })
 
         before('user create', (done) => {
@@ -103,8 +102,7 @@ describe('USER GET BY ID', () => {
                 .expect(200)
                 .end((err, res) => {
                     if(err) return done(err);
-                    const respData = res.body.data
-                    const userId = res.body.data.userGetById._id
+                    const respData = res.body.data;
                     console.log("RESP BODY USER GET BY ID ===", respData)
 
                     expect(respData.userGetById._id).eq(userId)
