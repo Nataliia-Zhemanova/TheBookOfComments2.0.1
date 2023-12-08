@@ -1,7 +1,4 @@
-const request = require('supertest')
 const {expect} = require('chai')
-
-
 const {requestGql}  = require ('../../helper')
 const { userCreateM } = require ('./query')
 const { arg } = require ('./data')
