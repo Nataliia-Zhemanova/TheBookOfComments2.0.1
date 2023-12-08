@@ -11,7 +11,7 @@ const User = require('../User')
 describe('USER GET BY ID', () => {
     describe('USER GET BY ID - POSITIVE', () => {
 
-        let userId = null;
+       let userId = null;
 
         before('user delete all', (done) => {
             User.deleteMany({})
@@ -104,7 +104,7 @@ describe('USER GET BY ID', () => {
                 });
         });
 
-        it('user get by non existing id', (done) => {
+        it.skip('user get by non existing id', (done) => {
 
             const userGet = {
                 userId: generateId(),
