@@ -11,6 +11,7 @@ describe('USER CREATE', () => {
                 query: userCreateM,
                 variables: arg
             }
+
             requestGql(postData)
                 .expect(200)
                 .end((err, res) => {
