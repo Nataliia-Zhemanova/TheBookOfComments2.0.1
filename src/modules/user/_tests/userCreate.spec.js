@@ -1,17 +1,17 @@
 const {expect} = require('chai')
-const { userCreateQuery, } = require('./queries')
-const { createUserArgs, } = require('./args')
-const {requestGql} = require("../../helper");
+const { userCreateQuery, } = require('../../helpers/queries')
+const { createUserArgs, } = require('../../helpers/args')
+const {requestGql} = require("../../helpers/generalHelper");
+const {createUser} = require("../../helpers/userHelper");
+
+
 
 describe('create user', () => {
     describe('positive', () => {
         let res, resBody
         before(async() => {
-            const postCreateData = {
-                query: userCreateQuery,
-                variables: createUserArgs
-            }
-            res = await requestGql(postCreateData)
+            res = await createUser()
+
             resBody = res.body.data.userCreate
         })
         it('verify created user first name', async() => {

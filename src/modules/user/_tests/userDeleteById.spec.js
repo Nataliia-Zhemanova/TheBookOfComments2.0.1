@@ -1,8 +1,8 @@
 const request = require('supertest')
 const {expect} = require('chai')
 const graphQLEndpoint = 'http://localhost:5000/graphql'
-const {requestGql} = require("../../helper");
-const { deleteUerQuery, userDeleteQuery} = require('./queries')
+const {requestGql} = require("../../helpers/generalHelper");
+const { deleteUerQuery, userDeleteQuery} = require('../../helpers/queries')
 
 describe('delete user', () => {
     describe('delete user - positive', () => {

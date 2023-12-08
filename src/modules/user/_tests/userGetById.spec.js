@@ -1,8 +1,8 @@
 const request = require('supertest')
 const {expect} = require('chai')
-const {requestGql} = require("../../helper");
-const {userCreateQuery, userGetById} = require("./queries");
-const {createUserArgs} = require('./args')
+const {requestGql} = require("../../helpers/generalHelper");
+const {userCreateQuery, userGetById} = require("../../helpers/queries");
+const {createUserArgs} = require('../../helpers/args')
 const graphQLEndpoint = 'http://localhost:5000/graphql'
 const User = require('../User')
 
