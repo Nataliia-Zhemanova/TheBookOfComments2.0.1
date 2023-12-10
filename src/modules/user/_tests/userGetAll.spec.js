@@ -1,8 +1,7 @@
-const request = require('supertest')
 const {expect} = require('chai')
 const {createUser, getAllUsers} = require("../../helpers/userHelper");
 const {userGetAllArgs} = require("../../helpers/args");
-const graphQLEndpoint = 'http://localhost:5000/graphql'
+
 
 describe('get all users', () => {
     describe('get al users - positive', () => {

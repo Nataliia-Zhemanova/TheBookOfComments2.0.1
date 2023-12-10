@@ -1,7 +1,5 @@
 const {expect} = require('chai')
-const { userCreateQuery, } = require('../../helpers/queries')
 const { createUserArgs, } = require('../../helpers/args')
-const {requestGql} = require("../../helpers/generalHelper");
 const {createUser} = require("../../helpers/userHelper");
 
 

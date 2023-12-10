@@ -8,12 +8,8 @@ const userCreateQuery = `mutation UserCreate($userInput: UserItems) {
                     }
                 }`
 
-const userDeleteQuery = `mutation UserCreate($userInput: UserItems) {
-                    userCreate(userInput: $userInput) {
-                          _id
-                           firstName
-                           lastName
-                    }
+const userDeleteQuery = `mutation UserDeleteById($userId: ID!) {
+                  userDeleteById(userId: $userId)
                 }`
 
 const userGetByIdQuery = `mutation UserCreate($userInput: UserItems) {

@@ -11,8 +11,13 @@ const userGetAllArgs = {
     amount: 4
 }
 
+// to to refactor
+const userDeleteById = {
+    userId: this.userId
+}
+
 // const getUserByIdArgs = {
 //     userId: userId
 // }
 
-    module.exports = { createUserArgs, userGetAllArgs }
+    module.exports = { createUserArgs, userGetAllArgs, userDeleteById }
