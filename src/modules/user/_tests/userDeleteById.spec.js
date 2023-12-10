@@ -1,7 +1,10 @@
 const request = require('supertest')
 const {expect} = require('chai')
 const graphQLEndpoint = 'http://localhost:5000/graphql'
-const {createUser, deleteUserById} = require("../../helpers/userHelper");
+const {createUser, deleteUser} = require("../../helpers/userHelper");
+const {userDeleteQuery} = require("../../helpers/queries");
+const {userDeleteArgs} = require("../../helpers/args");
+const {requestGql} = require("../../helpers/generalHelper");
 
 describe('delete user', () => {
     describe('delete user - positive', () => {
@@ -12,22 +15,15 @@ describe('delete user', () => {
         });
 
         it('verify user delete successfully', async() => {
-            const arg = {
-                userId: userId
-            }
             const postDeleteData = {
-                query: `mutation UserDeleteById($userId: ID!) {
-                  userDeleteById(userId: $userId)
-                }`,
-                variables: arg
+                query: userDeleteQuery,
+                variables: userDeleteArgs(userId)
             }
 
-            res = await request(graphQLEndpoint)
-                .post('/')
-                .send(postDeleteData)
-                .expect(200)
+            res = await requestGql(postDeleteData)
+            console.log(res.body)
 
-           // res = deleteUserById(userId)
+            // res = deleteUser(userId)
             const resBody = res.body.data.userDeleteById
             expect(resBody).eq(true)
         });

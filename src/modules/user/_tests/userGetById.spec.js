@@ -9,10 +9,10 @@ const User = require('../User')
 describe('get user by id', () => {
     let res, resData, userId
     describe('get user by id - positive', () => {
-        before('delete all users', (done)=>{
-            User.deleteMany({})
-            return done()
-        })
+        // before('delete all users', (done)=>{
+        //     User.deleteMany({})
+        //     return done()
+        // })
         before(async() => {
             const postUserCreateData = {
                 query: userCreateQuery,
