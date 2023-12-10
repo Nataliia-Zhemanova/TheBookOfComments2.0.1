@@ -1,10 +1,11 @@
 const request = require('supertest')
 const {expect} = require('chai')
 const {requestGql} = require("../../helpers/generalHelper");
-const {userCreateQuery, userGetById} = require("../../helpers/queries");
-const {createUserArgs} = require('../../helpers/args')
+const {userCreateQuery, userGetByIdQuery} = require("../../helpers/queries");
+const {createUserArgs, userGetByIdArgs} = require('../../helpers/args')
 const graphQLEndpoint = 'http://localhost:5000/graphql'
 const User = require('../User')
+const {createUser} = require("../../helpers/userHelper");
 
 describe('get user by id', () => {
     let res, resData, userId
@@ -14,31 +15,16 @@ describe('get user by id', () => {
         //     return done()
         // })
         before(async() => {
-            const postUserCreateData = {
-                query: userCreateQuery,
-                variables: createUserArgs
-            }
-            res = await requestGql(postUserCreateData)
+            res = await createUser()
+            userId  = res.body.data.userCreate._id
+            console.log(userId)
 
-                userId = res.body.data.userCreate._id
-                console.log('User Id = ', userId)
-
-            const arg = {
-                userId: userId
-            }
             const postGetData = {
-                query: `query UserGetById($userId: ID!) {
-                          userGetById(userId: $userId) {
-                            _id
-                            firstName
-                            lastName
-                          }
-                        }`,
-                variables: arg
+                query: userGetByIdQuery,
+                variables: userGetByIdArgs(userId)
             }
             res = await requestGql(postGetData)
             resData = res.body.data.userGetById
-            console.log(resData)
         });
         it('verify user id', async() => {
                 expect(resData._id).to.eq(userId)

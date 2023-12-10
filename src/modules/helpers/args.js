@@ -12,11 +12,11 @@ const userGetAllArgs = {
 }
 
 function userDeleteArgs(userId) {
-    return {userId: userId}
+    return {userId}
 }
 
-const userGetByIdArgs = {
-    userId: this.userId
+function userGetByIdArgs(userId){
+    return {userId}
 }
 
     module.exports = { createUserArgs, userGetAllArgs, userDeleteArgs, userGetByIdArgs }
