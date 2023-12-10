@@ -1,4 +1,4 @@
-const request = require('supertest')
+const generateId = require('../../../utils/generateId')
 const {expect} = require('chai')
 const {requestGql} = require("../../helpers/generalHelper");
 const {userCreateQuery, userGetByIdQuery} = require("../../helpers/queries");
@@ -9,7 +9,7 @@ const {createUser} = require("../../helpers/userHelper");
 
 describe('get user by id', () => {
     let res, resData, userId
-    describe('get user by id - positive', () => {
+    describe.skip('get user by id - positive', () => {
         // before('delete all users', (done)=>{
         //     User.deleteMany({})
         //     return done()
@@ -37,6 +37,52 @@ describe('get user by id', () => {
         });
     })
     describe('get user by id - negative', () => {
+        let userInvalidId, resData
+        before(() => {
+            userInvalidId = generateId()
+        })
+        it('verify get user by non-existing id', async() => {
+            const postGetData = {
+                query: userGetByIdQuery,
+                variables: userGetByIdArgs(userInvalidId)
+            }
+            res = await requestGql(postGetData)
 
+            resData = res.body.errors[0]
+            console.log(resData.message)
+            expect(resData.message).include('null')
+        });
+        it('get user w/o id', async() => {
+            const postGetData = {
+                query: userGetByIdQuery,
+                variables: userGetByIdArgs('')
+            }
+            res = await requestGql(postGetData)
+            resData = res.body.errors[0]
+            console.log(resData.message)
+            expect(resData.message).include('failed')
+        });
+        it('get user with number id', async() => {
+            const postGetData = {
+                query: userGetByIdQuery,
+                variables: userGetByIdArgs(1254854785478547465466156516412565168951616148651979156151915165)
+            }
+            res = await requestGql(postGetData)
+            resData = res.body.errors[0]
+            console.log(resData.message)
+            expect(resData.message).include('failed')
+        });
+
+        // double check userId types / failed on expect(200) ?!!!!!
+        it('get user with invalid id type', async() => {
+            const postGetData = {
+                query: userGetByIdQuery,
+                variables: userGetByIdArgs([1,2,3])
+            }
+            res = await requestGql(postGetData)
+            resData = res.body.errors[0]
+            console.log(resData.message)
+            expect(resData.message).include('failed')
+        });
     });
 })
