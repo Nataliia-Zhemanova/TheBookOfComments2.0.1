@@ -21,7 +21,6 @@ describe('delete user', () => {
             }
 
             res = await requestGql(postDeleteData)
-            console.log(res.body)
 
             // res = deleteUser(userId)
             const resBody = res.body.data.userDeleteById

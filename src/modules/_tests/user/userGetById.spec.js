@@ -4,7 +4,7 @@ const {requestGql} = require("../../helpers/generalHelper");
 const {userCreateQuery, userGetByIdQuery} = require("../../helpers/queries");
 const {createUserArgs, userGetByIdArgs} = require('../../helpers/args')
 const graphQLEndpoint = 'http://localhost:5000/graphql'
-const User = require('../User')
+const User = require('../../user/User')
 const {createUser} = require("../../helpers/userHelper");
 
 describe('get user by id', () => {
@@ -17,7 +17,6 @@ describe('get user by id', () => {
         before(async() => {
             res = await createUser()
             userId  = res.body.data.userCreate._id
-            console.log(userId)
 
             const postGetData = {
                 query: userGetByIdQuery,

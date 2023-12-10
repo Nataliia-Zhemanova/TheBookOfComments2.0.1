@@ -13,7 +13,8 @@ describe('get all users', () => {
     it('verify all users length', async() => {
         res = await getAllUsers()
         const resBody = res.body.data.usersGetAll
-        console.log(resBody)
+
+        // this assertion should be refactored in case of DB dropped
         expect(resBody.length).to.eq(userGetAllArgs.amount)
         });
     });
