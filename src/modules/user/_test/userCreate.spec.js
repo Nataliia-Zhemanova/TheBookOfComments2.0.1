@@ -25,7 +25,41 @@ describe('USER CREATE', () => {
     });
 
     describe('USER CREATE - NEGATIVE', () => {
+        it('user create with empty query', (done) => {
 
+            const postData = {
+                query: ``,
+                variables: arg
+            }
+            requestGql(postData)
+                .expect(400)
+                .end((err, res) => {
+                    if(err) return done(err);
+                    const respData = res.body.errors[0]
+                    console.log("====", respData)
+                    expect(respData.message).eq('GraphQL operations must contain a non-empty `query` or a `persistedQuery` extension.')
+                    expect(respData.extensions.code).to.eq('INTERNAL_SERVER_ERROR')
+                    done()
+                })
+        });
+
+        it('user create with the query as an object data type', (done) => {
+
+            const postData = {
+                query: {userCreateM},
+                variables: arg
+            }
+            requestGql(postData)
+                .expect(400)
+                .end((err, res) => {
+                    if(err) return done(err);
+                    const respData = res.error
+                    console.log("second ====", respData)
+                    expect(respData.text).eq('GraphQL queries must be strings.')
+                    expect(respData.status).to.eq(400)
+                    done()
+                })
+        });
     });
 
 });
