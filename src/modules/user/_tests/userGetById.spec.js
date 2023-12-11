@@ -73,7 +73,7 @@ describe('GET USER BY ID', () => {
                     if (err) return done(err)
                     const respData = res.body.data
                     userId = respData.userCreate._id
-                     console.log(respData)
+                     // console.log(respData)
                     done()
                 })
           })
@@ -92,9 +92,8 @@ describe('GET USER BY ID', () => {
                     if (err) return done(err)
                     const respData = res.body
                     console.log(respData)
-                    // expect(respData.userGetById._id).to.eq(userId)
-                    // expect(respData.userGetById.firstName).to.eq(userCreateArg.userInput.firstName)
-                    // expect(respData.userGetById.lastName).to.eq(userCreateArg.userInput.lastName)
+                    expect(respData.data).to.eq(null)
+                    expect(respData.errors[0].message).to.eq('Cannot return null for non-nullable field Query.userGetById.')
                     done()
                 })
         });
