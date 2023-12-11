@@ -97,5 +97,25 @@ describe('GET USER BY ID', () => {
                     done()
                 })
         });
+
+        it('Get user with empty id field', (done) => {
+            const userGet = {
+                userId: ""
+            }
+            const postData = {
+                query: getUserByIdQ,
+                variables: userGet
+            }
+            gqlRequest(postData)
+                .expect(200)
+                .end((err, res) => {
+                    if (err) return done(err)
+                    const respData = res.body
+                    console.log(respData)
+                    expect(respData.data).to.eq(null)
+                    expect(respData.errors[0].message).to.eq('Cast to ObjectId failed for value "" (type string) at path "_id" for model "User"')
+                    done()
+                })
+        });
     });
 });
