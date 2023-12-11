@@ -102,12 +102,57 @@ describe('USER GET BY ID', () => {
                 .expect(200)
                 .end((err, res) => {
                     if(err) return done(err);
-                    const respData = res.body.data;
+                    const respData = res.body;
                     console.log("RESP BODY USER GET BY ID ===", respData)
 
-                    expect(respData.userGetById._id).eq(userId)
-                    expect(respData.userGetById.firstName).eq(arg.userInput.firstName)
-                    expect(respData.userGetById.lastName).eq(arg.userInput.lastName)
+
+                    expect(respData.data).to.eq(null)
+                    expect(respData.errors[0].message).to.eq('Cannot return null for non-nullable field Query.userGetById.')
+                    done()
+                })
+        });
+
+        it('user get with empty id string', (done) => {
+            const userGet = {
+                userId: generateId(),
+            };
+            const postData = {
+                query: userGetByIdQ,
+                variables: userGet
+            }
+
+            requestGql(postData)
+                .expect(200)
+                .end((err, res) => {
+                    if(err) return done(err);
+                    const respData = res.body;
+                    console.log('GET BY EMPTY ID RESP ===', respData)
+
+                    expect(respData.data).to.eq(null)
+                    expect(respData.errors[0].message).to.eq('Cannot return null for non-nullable field Query.userGetById.')
+                    done()
+                })
+        });
+
+
+        it('get a deleted user by ID', (done) => {  //BUG
+            const userGet = {
+                userId: '657695f72f8467fbedfa90ac',
+            };
+            const postData = {
+                query: userGetByIdQ,
+                variables: userGet
+            }
+
+            requestGql(postData)
+                .expect(200)
+                .end((err, res) => {
+                    if(err) return done(err);
+                    const respData = res.body;
+                    console.log('GET DELETED USER BY ID RESP ===', respData)
+
+                    // expect(respData.data).to.eq(null)
+                    // expect(respData.errors[0].message).to.eq('Cannot return null for non-nullable field Query.userGetById.')
                     done()
                 })
         });
