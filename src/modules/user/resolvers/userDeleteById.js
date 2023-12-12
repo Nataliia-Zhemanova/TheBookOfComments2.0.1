@@ -4,4 +4,5 @@ const userDeleteById = async (_, {userId: id})=>{
     {_id: id})).deletedCount;
   return wasDeleted;
 }
+
 module.exports = userDeleteById
