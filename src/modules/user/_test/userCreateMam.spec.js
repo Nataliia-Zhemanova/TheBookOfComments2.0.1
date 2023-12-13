@@ -2,7 +2,6 @@ const { expect } = require('chai')
 const { requestGql } = require('../../helper')
 const { userCreateM } = require('./queries')
 const { arg, wrongArg } = require('./data')
-const { faker } = require('@faker-js/faker')
 
 describe('USER CREATE', () => {
     describe('USER CREATE - POSITIVE', () => {
@@ -27,36 +26,11 @@ describe('USER CREATE', () => {
         });
     })
 
+
     describe('USER CREATE - NEGATIVE', () => {
-        it('create user without first name', (done) => {
+        it('create user with wrong argument types', (done) => {
             const postData = {
                 query: userCreateM,
-                variables: wrongArg
-            }
-
-            requestGql(postData)
-                .expect(200)
-                .end((err, res) => {
-                    if(err) return done(err);
-                    const respData = res.body
-
-                    console.log("RESP BODY ===", respData)
-
-                    // expect(respData.userCreate.firstName).eq(arg.userInput.firstName)
-                    // expect(respData.userCreate.lastName).eq(arg.userInput.lastName)
-                    done()
-                })
-        });
-
-        it('create user without first name', (done) => {
-            const postData = {
-                query: `mutation UserCreate($userInput: UserItems) {
-  userCreate(userInput: $userInput) {
-    _id1
-    firstName
-    lastName
-  }
-}`,
                 variables: wrongArg
             }
 
@@ -68,11 +42,64 @@ describe('USER CREATE', () => {
 
                     console.log("RESP BODY ===", respData)
 
-                    expect(respData.userCreate.errors[0].message).eq('Cannot query field "_id1" on type "User". Did you mean "_id"?')
-                    expect(respData.userCreate.errors).to.be.an('array')
+                    expect(respData.errors[0].message).eq(`Variable "$userInput" got invalid value 123 at "userInput.firstName"; String cannot represent a non string value: 123`)
+                    expect(respData.errors).to.be.an('array')
                     done()
                 })
         });
 
+
+        it('create user with invalid query', (done) => {
+            const postData = {
+                query: `mutation UserCreate($userInput: UserItems) {
+  userCreate(userInput: $userInput) {
+    _id1
+    firstName
+    lastName
+  }
+}`,
+                variables: arg
+            }
+
+            requestGql(postData)
+                .expect(400)
+                .end((err, res) => {
+                    if(err) return done(err);
+                    const respData = res.body
+
+                    console.log("RESP BODY ===", respData)
+
+                    expect(respData.errors[0].message).eq('Cannot query field "_id1" on type "User". Did you mean "_id"?')
+                    expect(respData.errors).to.be.an('array')
+                    done()
+                })
+        });
+
+
+        // BUG - I can create a user without _id (which is required) in the query
+        it.skip('create user without id in query', (done) => {
+            const postData = {
+                query: `mutation UserCreate($userInput: UserItems) {
+  userCreate(userInput: $userInput) {
+    firstName,
+    lastName
+  }
+}`,
+                variables: arg
+            }
+
+            requestGql(postData)
+                .expect(400)
+                .end((err, res) => {
+                    if(err) return done(err);
+                    const respData = res.body
+
+                    console.log("RES BODY ===", respData)
+
+                    expect(respData.message).not.to.eq('expected 400 "Bad Request", got 200 "OK"')
+                    done()
+
+            })
+        });
     })
 });

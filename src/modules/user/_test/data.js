@@ -9,8 +9,8 @@ const arg = {
 
 const wrongArg = {
     userInput: {
-        firstName: '',
-        lastName: faker.name.lastName(),
+        firstName: 123,
+        lastName: 123,
     }
 }
 
