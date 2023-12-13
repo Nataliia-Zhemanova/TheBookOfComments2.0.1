@@ -21,7 +21,6 @@ describe("USER CREATE", () => {
         .end((err, res) => {
           if (err) return done(err);
           const respData = res.body.data;
-          console.log("RESP BODY ====", respData);
           expect(respData.userCreate.firstName).to.equal(arg.userInput.firstName);
           expect(respData.userCreate.lastName).to.equal(arg.userInput.lastName);
           done();
@@ -41,7 +40,6 @@ describe("USER CREATE", () => {
         .end((err, res) => {
           if (err) return done(err);
           const respData = res.body.data;
-          console.log("RESP BODY ====", respData);
           expect(respData.userCreate.firstName).to.equal(argEmptyFirstName.userInput.firstName);
           expect(respData.userCreate.lastName).to.equal(argEmptyFirstName.userInput.lastName);
           done();
@@ -58,7 +56,6 @@ describe("USER CREATE", () => {
         .end((err, res) => {
           if (err) return done(err);
           const respData = res.body.data;
-          console.log("RESP BODY ====", respData);
           expect(respData.userCreate.firstName).to.equal(argNumLastName.userInput.firstName);
           expect(respData.userCreate.lastName).to.equal(argNumLastName.userInput.lastName);
           done();
@@ -75,7 +72,6 @@ describe("USER CREATE", () => {
         .end((err, res) => {
           if (err) return done(err);
           const respData = res.body.data;
-          console.log("RESP BODY ====", respData);
           expect(respData.userCreate.firstName).to.equal(argExtraData.userInput.firstName);
           expect(respData.userCreate.lastName).to.equal(argExtraData.userInput.lastName);
           done();
