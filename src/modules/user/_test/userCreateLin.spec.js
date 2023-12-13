@@ -7,7 +7,7 @@ const { requestGql } = require('../../helper')
 const { userCreateM} = require('./queries')
 // or const { userCreateM , arg } = require('./queries')
 
-const { arg } = require('./data')
+const { arg, argN1 } = require('./data')
 const faker = require("faker");
 //const generateId = require("../../../utils/generateId");
 
@@ -47,6 +47,7 @@ describe('USER CREATE', () => {
                   const respData = res.body.data
                   console.log("RESP BODY ===", respData)
                   expect(respData.userCreate.firstName).eq(arg.userInput.firstName)
+                  expect(respData.userCreate.lastName).eq(arg.userInput.lastName)
                   //expect(respData.userCreate.lastName).eq("lastName1")
                   done();
 
@@ -54,6 +55,34 @@ describe('USER CREATE', () => {
       });
     });
     describe('USER CREATE - NEGATIVE', () => {
+        describe('USER CREATE - POSITIVE', () => {
+            it('user create', (done) => {
 
-    })
+                const postData = {
+                    query: userCreateM,
+                    variables: argN1,
+                };
+
+
+                //              variables: arg
+                //        }
+                requestGql(postData)
+                    // request(graphQLEndpoint)
+                    //     .post('/')
+                    // //.post('http://localhost:5000/graphql')
+                    //     .send(postData)
+                    .expect(200)
+                    .end((err, res) => {
+                        if (err) return done(err);
+                        const respData = res.body
+                        console.log("RESP BODY ===", respData)
+
+                        expect(respData.userCreate.lastName).eq(arg.userInput.lastName)
+                        expect(respData.userCreate.firstName).eq(arg.userInput.firstName)
+                        done();
+
+                    });
+            });
+        });
+    });
 })
