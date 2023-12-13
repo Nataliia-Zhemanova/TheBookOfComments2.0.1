@@ -3,6 +3,7 @@ const {requestGqL} = require('../../helper')
 const {userCreateQuery, userDeleteByIdM} = require('./queries')
 const {arg} = require('./data')
 const User = require('../User')
+const generatedId = require ('../../../utils/generateId')
 
 describe('USER DELETE BY ID', () => {
    describe('USER DELETE BY ID positive', () => {
@@ -48,11 +49,26 @@ describe('USER DELETE BY ID', () => {
     })
         })
 
-
-
-
     describe('USER DELETE BY ID negative', () => {
+        it('User delete by fake Id', (done) => {
+            const delUser = {
+                userId: generatedId()
+            }
+            const postData = {
+                query: userDeleteByIdM,
+                variables: delUser
+            }
+            requestGqL(postData)
+                .expect(200)
+                .end((err, res) => {
+                    if(err) return done (err)
 
+                    const resData = res.body.data
+                    console.log("RESBODY ===", resData)
+                    done()
+                    expect(resData.userDeleteById).to.equal(false)
+            })
+        })
     })
 })
 
