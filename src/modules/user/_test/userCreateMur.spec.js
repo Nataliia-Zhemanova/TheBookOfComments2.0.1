@@ -1,13 +1,13 @@
 const { expect } = require('chai')
 const { requestGql } = require ('../../helper')
 const { userCreateM} = require('./queries')
-const {arg} = require('./data')
+const {userInput} = require('./data')
 describe ('USER CREATE', () => {
     describe ('USER CREATE - POSITIVE', () => {
         it('user create', (done) => {
             const postData = {
                 query: userCreateM,
-                variables: arg
+                variables: userInput
             }
             requestGql(postData)
                 .expect(200)
@@ -20,5 +20,38 @@ describe ('USER CREATE', () => {
         })
     })
     describe ('USER CREATE - NEGATIVE', () => {
+        it('user create with empty query', (done) => {
+            const postData = {
+                query: '',
+                variables: userInput
+            }
+            requestGql(postData)
+                .expect(400)
+                .end((err, res) => {
+                    if(err) return done(err);
+                    const respData = res.body.errors[0]
+                    console.log("ERROR BODY ===", respData)
+                    expect(respData.message).eq('GraphQL operations must contain a non-empty `query` or a `persistedQuery` extension.')
+                    expect(respData.extensions.code).to.eq('INTERNAL_SERVER_ERROR');
+                    done()
+                })
+        })
+
+        it('user create with empty variables', (done) => {
+            const postData = {
+                query: userCreateM,
+                variables: ''
+            }
+            requestGql(postData)
+                .expect(400)
+                .end((err, res) => {
+                    if(err) return done(err);
+                    const respData = res.body.errors[0]
+                    console.log("ERROR BODY ===", respData)
+                    expect(respData.message).eq('Variables must be provided as an Object where each property is a variable value. Perhaps look to see if an unparsed JSON string was provided.')
+                    expect(respData.extensions.code).to.eq('INTERNAL_SERVER_ERROR');
+                    done()
+                })
+        })
     })
 } )
