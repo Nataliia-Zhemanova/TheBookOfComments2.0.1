@@ -7,4 +7,11 @@ const arg = {
     }
 }
 
-module.exports = { arg }
+const argNeg = {
+    userInput: {
+        firstName: 3435435,
+        lastName: 342323
+    }
+}
+
+module.exports = { arg, argNeg }

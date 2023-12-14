@@ -1,7 +1,7 @@
 const {expect} = require('chai')
 const {requestGql}  = require ('../../helper')
 const { userCreateM } = require ('./query')
-const { arg } = require ('./data')
+const { arg, argNeg} = require ('./data')
 
 describe('USER CREATE', () => {
     describe('USER CREATE - POSITIVE', () => {
@@ -29,6 +29,21 @@ describe('USER CREATE', () => {
     });
 
     describe('USER CREATE - NEGATIVE', () => {
+        it('Create user with wrong arguments type', (done) => {
+            const postData = {
+                query: userCreateM,
+                variables: argNeg
+            }
+
+            requestGql(postData)
+                // .expect(200)
+                .end((err, res) => {
+                    if(err) return done(err)
+                    const respData = res.body
+                    expect(res.statusCode).to.eq(400)
+                    done()
+                })
+        });
 
     });
 });
