@@ -1,3 +1,4 @@
+
 const userCreateM = `mutation UserCreate($userInput: UserItems) {
   userCreate(userInput: $userInput) {
     _id
@@ -16,3 +17,4 @@ const userGetByIdQ = `query UserGetById($userId: ID!) {
 
 
 module.exports = { userCreateM, userGetByIdQ }
+
