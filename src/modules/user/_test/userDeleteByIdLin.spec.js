@@ -3,7 +3,7 @@ const { requestGql } = require('../../helper')
 const { userCreateM,userDeleteByIdM} = require('./queries')
 const { arg} = require('./data')
 const User = require('../User')
-const generateId = require("../../../utils/generateId");
+//const generateId = require("../../../utils/generateId");
 describe('USER DELETE BY ID', () => {
     describe('USER DELETE BY ID - POSITIVE', () => {
 
