@@ -1,13 +1,11 @@
-//const request = require('supertest')
-const {expect} = require ('chai')
-//const graphQLEndpoint = 'http://localhost:5000/graphql'
 
+const {expect} = require ('chai')
 const { requestGql } = require('../../helper')
 const { userCreateM, userGetByIdQ } = require('./queries')
 const { arg } = require('./data')
 const generateId = require('../../../utils/generateId')
 const User = require('../User')
-// or const { User } = require('./data')    (User from file User.js)
+
 describe('USER GET BY ID', () => {
     describe('USER GET BY ID - POSITIVE', () => {
 
@@ -23,13 +21,8 @@ describe('USER GET BY ID', () => {
                 query: userCreateM,
                 variables: arg,
             };
-//Вопрос: надо ли писать перед каждым негативным тестом before - delete and before create? or to write beforeEach?
 
             requestGql(postData)
-                // request(graphQLEndpoint)
-                //     .post('/')
-                //     //.post('http://localhost:5000/graphql')
-                //     .send(postData)
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
@@ -37,14 +30,10 @@ describe('USER GET BY ID', () => {
                     userId = res.body.data.userCreate._id
                     console.log("RESP BODY ===", respData)
                     console.log("USER ID ===", userId)
-                    //expect(respData.userCreate.firstName).eq('firstName')
-                    //expect(respData.userCreate.lastName).eq('lastName')
                     done();
                 });
         });
-        // it.only - только это
-        // it.skip - пропустить
-        //describe.only - также и .skip
+
         it('user get by id', (done) => {
 
             const userGet = {
@@ -55,10 +44,6 @@ describe('USER GET BY ID', () => {
                 variables: userGet,
             };
             requestGql(postData)
-                // request(graphQLEndpoint)
-                //  .post('/')
-                //  //.post('http://localhost:5000/graphql')
-                //  .send(postData)
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
@@ -88,10 +73,6 @@ describe('USER GET BY ID', () => {
             };
 
             requestGql(postData)
-                // request(graphQLEndpoint)
-                //     .post('/')
-                //     //.post('http://localhost:5000/graphql')
-                //     .send(postData)
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
@@ -99,8 +80,6 @@ describe('USER GET BY ID', () => {
                     userId = res.body.data.userCreate._id
                     console.log("RESP BODY ===", respData)
                     console.log("USER ID ===", userId)
-                    //expect(respData.userCreate.firstName).eq('firstName')
-                    //expect(respData.userCreate.lastName).eq('lastName')
                     done();
                 });
         });
@@ -126,7 +105,6 @@ describe('USER GET BY ID', () => {
                     expect(respData.message).eq('Cannot return null for non-nullable field Query.userGetById.')
                     expect(respData.extensions.code).to.eq('INTERNAL_SERVER_ERROR')
                     done();
-
                 });
         });
 
@@ -147,10 +125,6 @@ describe('USER GET BY ID', () => {
             };
 
             requestGql(postData)
-                // request(graphQLEndpoint)
-                //     .post('/')
-                //     //.post('http://localhost:5000/graphql')
-                //     .send(postData)
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
@@ -186,7 +160,6 @@ describe('USER GET BY ID', () => {
                     done();
                 });
         });
-
     });
 
     describe('USER GET BY ID - NEGATIVE 3', () => {
@@ -203,10 +176,6 @@ describe('USER GET BY ID', () => {
             };
 
             requestGql(postData)
-                // request(graphQLEndpoint)
-                //     .post('/')
-                //     //.post('http://localhost:5000/graphql')
-                //     .send(postData)
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
@@ -214,8 +183,6 @@ describe('USER GET BY ID', () => {
                     userId = res.body.data.userCreate._id
                     console.log("RESP BODY ===", respData)
                     console.log("USER ID ===", userId)
-                    //expect(respData.userCreate.firstName).eq('firstName')
-                    //expect(respData.userCreate.lastName).eq('lastName')
                     done();
                 });
         });
