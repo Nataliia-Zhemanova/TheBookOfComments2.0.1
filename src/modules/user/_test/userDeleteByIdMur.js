@@ -2,7 +2,7 @@ const { requestGql } = require ('../../helper')
 // Импортируем функцию `expect` из библиотеки `chai`, которая используется для проверки результатов HTTP-запросов
 const { expect } = require('chai');
 const { userCreateM, userDeleteById, userDeleteByIdM} = require('./queries')
-const {arg} = require('./data')
+const {userInput} = require('./data')
 
 
 // Начинаем тестовый набор `USER DELETE BY ID`
@@ -17,7 +17,7 @@ describe('USER DELETE BY ID', () => {
             // Определяем POST-данные для создания пользователя
             const postData = {
                 query: userCreateM,
-                variables: arg,
+                variables: userInput,
             };
             // Выполняем POST-запрос к конечной точке GraphQL для создания пользователя
             requestGql(postData)

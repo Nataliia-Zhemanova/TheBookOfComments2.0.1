@@ -2,8 +2,16 @@ const { expect } = require('chai')
 const { requestGql } = require ('../../helper')
 const { userCreateM} = require('./queries')
 const {userInput} = require('./data')
+const User = require ('../User')
+const generateId = require('../../../utils/generateId')
 describe ('USER CREATE', () => {
     describe ('USER CREATE - POSITIVE', () => {
+
+        before('user delete all', (done) => {
+            User.deleteMany({});
+            return done();
+        });
+
         it('user create', (done) => {
             const postData = {
                 query: userCreateM,
