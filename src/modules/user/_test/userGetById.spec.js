@@ -22,8 +22,8 @@ describe('USER CREATE', () => {
                     if (err) return done(err);
                     const respData = res.body.data
                     userIdd = res.body.data.userCreate._id
-                    console.log("resp body===", respData)
-                    console.log("resp id===", userIdd)
+                    // console.log("resp body===", respData)
+                    // console.log("resp id===", userIdd)
                     done()
                 })
         })
@@ -40,7 +40,7 @@ describe('USER CREATE', () => {
                 .end((err, res) => {
                     if (err) return done(err);
                     const respData = res.body.data
-                    console.log("resp body user get by id===", respData)
+                    // console.log("resp body user get by id===", respData)
                     expect(respData.userGetById._id).eq(userIdd)
                     expect(respData.userGetById.firstName).eq(arg.userInput.firstName)
                     expect(respData.userGetById.lastName).eq(arg.userInput.lastName)
@@ -63,8 +63,8 @@ describe('USER CREATE', () => {
                         if (err) return done(err);
                         const respData = res.body.data
                         userId = res.body.data.userCreate._id
-                        console.log("resp body===2", respData)
-                        console.log("resp id===2", userId)
+                        // console.log("resp body===2", respData)
+                        // console.log("resp id===2", userId)
                         done()
                     })
             })
@@ -80,8 +80,8 @@ describe('USER CREATE', () => {
                     .expect(200)
                     .end((err, res) => {
                         if (err) return done(err);
-                        const respData = res.body.data
-                        console.log("resp body user get by id===", respData)
+                        const respData = res.body
+                        console.log("RESP BODY ===", respData)
                         // expect(respData.userGetById._id).eq(userIdd)
                         // expect(respData.userGetById.firstName).eq(arg.userInput.firstName)
                         // expect(respData.userGetById.lastName).eq(arg.userInput.lastName)

@@ -1,7 +1,7 @@
 const { expect } = require('chai')
 const {requestGql} = require("../../helper");
 const { userCreateQuery, userGetIdQuery } = require("../../../queries")
-const { arg } = require("../../../data")
+const { arg,  } = require("../../../data")
 describe('USER CREATE', () => {
     describe('USER CREATE - POSITIVE', () => {
         let userIdd = null

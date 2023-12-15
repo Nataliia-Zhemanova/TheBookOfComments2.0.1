@@ -1,8 +1,14 @@
 const faker = require('faker');
 const arg = {
     userInput: {
-        lastName: faker.name.lastName(),
-        firstName: faker.name.firstName()
+        firstName: faker.name.lastName(),
+        lastName: faker.name.firstName()
     }
 }
-module.exports = { arg }
+const wrongArg = {
+    userInput: {
+        firstName: 123,
+        lastName: 122
+    }
+}
+module.exports = { arg, wrongArg }
