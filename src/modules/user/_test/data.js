@@ -9,14 +9,15 @@ const arg = {
 const arg2  = {
     amount: 3,
 };
-
+const arg2N = {
+    amount: 'hello',
+};
 const argN1 = {
       userInput: {
-          firstName: "",
-          lastName: "",
+          firstName: 555,
+          lastName: faker.name.lastName(),
       },
 };
 
-
-module.exports = { arg, arg2, argN1 }
+module.exports = { arg, arg2, argN1, arg2N }
 

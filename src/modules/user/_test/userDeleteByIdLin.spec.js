@@ -72,8 +72,9 @@
 //         });
 //     });
 //     describe('USER GET BY ID - NEGATIVE', () => {});
-//
 // })
+//
+//
 // ___________________________________ OLD VERSION ____________________________________
 
 
@@ -131,9 +132,6 @@ describe('USER DELETE BY ID', () => {
 
                     console.log("RESP BODY USER DELETE BY ID ===", respData)
                     expect(respData.userDeleteById).to.be.true
-                    //expect(respData.userGetById.firstName).eq(user.userInput.firstName)
-                    //expect(respData.userGetById.lastName).eq(user.userInput.lastName)
-
                     done();
                 });
         });
@@ -166,9 +164,9 @@ describe('USER DELETE BY ID', () => {
                 });
         });
 
-        it.skip('user delete by generated id', (done) => {
+        it('user delete null id', (done) => {
             const arg = {
-                userId: generateId(),
+                userId: null,
             };
             const postData = {
                 query: userDeleteByIdM,
@@ -176,16 +174,13 @@ describe('USER DELETE BY ID', () => {
             };
 
             requestGql(postData)
-                .expect(200)
+                .expect(400)
                 .end((err, res) => {
                     if (err) return done(err);
-                    const respData = res.body;
-
-                    console.log("RESP BODY USER DELETE BY ID ===", respData)
-                    expect(respData.userDeleteById).to.be.true
-                    //expect(respData.userGetById.firstName).eq(user.userInput.firstName)
-                    //expect(respData.userGetById.lastName).eq(user.userInput.lastName)
-
+                    const respData = res.body.errors[0]
+                    console.log('RESP BODY USER GET BY ID ===', respData);
+                    expect(respData.message).eq('Variable "$userId" of non-null type "ID!" must not be null.')
+                    expect(respData.extensions.code).to.eq('BAD_USER_INPUT')
                     done();
             });
         });

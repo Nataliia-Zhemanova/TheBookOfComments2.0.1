@@ -93,7 +93,7 @@
 const {expect} = require ('chai')
 const { requestGql } = require('../../helper')
 const { userCreateM, userUpdateByIdM} = require('./queries')
-const { arg } = require('./data')
+const { arg, argN1 } = require('./data')
 const User = require('../User')
 
 describe('USER UPDATE BY ID', () => {
@@ -110,10 +110,10 @@ describe('USER UPDATE BY ID', () => {
                 variables: arg,
             };
 
-                requestGql(postData)
+            requestGql(postData)
                 .expect(200)
                 .end((err, res) => {
-                    if(err) return done(err);
+                    if (err) return done(err);
                     const respData = res.body.data
                     console.log("RESP BODY ===", respData)
                     //expect(respData.userCreate.firstName).eq('firstName')
@@ -149,6 +149,53 @@ describe('USER UPDATE BY ID', () => {
                 });
         });
     });
-    describe('USER UPDATE BY ID - NEGATIVE', () => {});
+    describe('USER UPDATE BY ID - NEGATIVE', () => {
+        describe('USER UPDATE BY ID - NEGATIVE', () => {
 
+            before('user delete all', (done) => {
+                User.deleteMany({})
+                return done();
+            });
+
+            before('user create', (done) => {
+                const postData = {
+                    query: userCreateM,
+                    variables: arg,
+                };
+
+                requestGql(postData)
+                    .expect(200)
+                    .end((err, res) => {
+                        if (err) return done(err);
+                        const respData = res.body.data
+                        console.log("RESP BODY ===", respData)
+                        //expect(respData.userCreate.firstName).eq('firstName')
+                        //expect(respData.userCreate.lastName).eq('lastName')
+                        done()
+
+                    })
+            })
+            it('user update by id negative', (done) => {
+
+                // const arg = {
+                //     userId: don't know what,
+                // };
+
+                const postData = {
+                    query: userUpdateByIdM,
+                    variables: argN1,
+                };
+
+                requestGql(postData)
+                    .expect(400)
+                    .end((err, res) => {
+                        if (err) return done(err);
+                        const respData = res.body.errors[0]
+                        console.log('RESP BODY USER GET BY ID ===', respData);
+                        expect(respData.extensions.code).to.eq('BAD_USER_INPUT')
+                        done();
+                    });
+            });
+        });
+    });
 })

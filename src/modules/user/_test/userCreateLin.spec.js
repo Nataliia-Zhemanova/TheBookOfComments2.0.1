@@ -8,7 +8,7 @@ const { userCreateM} = require('./queries')
 // or const { userCreateM , arg } = require('./queries')
 
 const { arg, argN1 } = require('./data')
-const faker = require("faker");
+//const faker = require("faker");
 //const generateId = require("../../../utils/generateId");
 
 describe('USER CREATE', () => {
@@ -55,30 +55,27 @@ describe('USER CREATE', () => {
       });
     });
     describe('USER CREATE - NEGATIVE', () => {
-        describe('USER CREATE - POSITIVE', () => {
-            it('user create', (done) => {
+        describe('USER CREATE - NEGATIVE', () => {
+            it('user create negative', (done) => {
 
                 const postData = {
                     query: userCreateM,
                     variables: argN1,
                 };
 
-
-                //              variables: arg
-                //        }
                 requestGql(postData)
                     // request(graphQLEndpoint)
                     //     .post('/')
                     // //.post('http://localhost:5000/graphql')
                     //     .send(postData)
-                    .expect(200)
+                    .expect(400)
                     .end((err, res) => {
                         if (err) return done(err);
-                        const respData = res.body
+                        const respData = res.body.errors[0]
                         console.log("RESP BODY ===", respData)
 
-                        expect(respData.userCreate.lastName).eq(arg.userInput.lastName)
-                        expect(respData.userCreate.firstName).eq(arg.userInput.firstName)
+                        expect(respData.message).eq('Variable "$userInput" got invalid value 555 at "userInput.firstName"; String cannot represent a non string value: 555')
+                        expect(respData.extensions.code).to.eq('BAD_USER_INPUT')
                         done();
 
                     });
@@ -86,3 +83,8 @@ describe('USER CREATE', () => {
         });
     });
 })
+
+// const respData = res.body.errors[0]
+// console.log("====", respData)
+// expect(respData.message).eq('GraphQL operations must contain a non-empty query or a persistedQuery extension.')
+// expect(respData.extensions.code).to.eq('INTERNAL_SERVER_ERROR')

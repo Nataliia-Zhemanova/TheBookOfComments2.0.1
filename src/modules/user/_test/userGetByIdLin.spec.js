@@ -11,7 +11,7 @@ const User = require('../User')
 describe('USER GET BY ID', () => {
     describe('USER GET BY ID - POSITIVE', () => {
 
-       let userId = null;
+        let userId = null;
 
         before('user delete all', (done) => {
             User.deleteMany({})
@@ -25,11 +25,11 @@ describe('USER GET BY ID', () => {
             };
 //Вопрос: надо ли писать перед каждым негативным тестом before - delete and before create? or to write beforeEach?
 
-              requestGql(postData)
-            // request(graphQLEndpoint)
-            //     .post('/')
-            //     //.post('http://localhost:5000/graphql')
-            //     .send(postData)
+            requestGql(postData)
+                // request(graphQLEndpoint)
+                //     .post('/')
+                //     //.post('http://localhost:5000/graphql')
+                //     .send(postData)
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
@@ -48,17 +48,17 @@ describe('USER GET BY ID', () => {
         it('user get by id', (done) => {
 
             const userGet = {
-                     userId: userId,
-                };
-                const postData = {
-                    query: userGetByIdQ,
-                    variables: userGet,
+                userId: userId,
+            };
+            const postData = {
+                query: userGetByIdQ,
+                variables: userGet,
             };
             requestGql(postData)
-               // request(graphQLEndpoint)
-               //  .post('/')
-               //  //.post('http://localhost:5000/graphql')
-               //  .send(postData)
+                // request(graphQLEndpoint)
+                //  .post('/')
+                //  //.post('http://localhost:5000/graphql')
+                //  .send(postData)
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
@@ -76,10 +76,10 @@ describe('USER GET BY ID', () => {
     describe('USER GET BY ID - NEGATIVE 1', () => {
         //let userId = null;
 
-        // before('user delete all', (done) => {
-        //     User.deleteMany({})
-        //     return done();
-        // });
+        before('user delete all', (done) => {
+            User.deleteMany({})
+            return done();
+        });
 
         before('user create', (done) => {
             const postData = {
@@ -105,7 +105,7 @@ describe('USER GET BY ID', () => {
                 });
         });
 
-        it.skip('user get by non existing id', (done) => {
+        it('user get by generatedId', (done) => {
 
             const userGet = {
                 userId: generateId(),
@@ -121,14 +121,12 @@ describe('USER GET BY ID', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
-                    const respData = res.body;
-
-                    console.log("RESP BODY USER GET BY ID ===", respData)
-                    expect(respData.userGetById._id).eq(userId)
-                    //expect(respData.userGetById.firstName).eq(arg.userInput.firstName)
-                    //expect(respData.userGetById.lastName).eq(arg.userInput.lastName)
-
+                    const respData = res.body.errors[0]
+                    console.log('RESP BODY USER GET BY ID ===', respData);
+                    expect(respData.message).eq('Cannot return null for non-nullable field Query.userGetById.')
+                    expect(respData.extensions.code).to.eq('INTERNAL_SERVER_ERROR')
                     done();
+
                 });
         });
 
@@ -137,10 +135,10 @@ describe('USER GET BY ID', () => {
     describe('USER GET BY ID - NEGATIVE 2', () => {
         //let userId = null;
 
-        // before('user delete all', (done) => {
-        //     User.deleteMany({})
-        //     return done();
-        // });
+        before('user delete all', (done) => {
+            User.deleteMany({})
+            return done();
+        });
 
         before('user create', (done) => {
             const postData = {
@@ -166,11 +164,10 @@ describe('USER GET BY ID', () => {
                 });
         });
 
-        it.skip('user get by empty id', (done) => {
+        it('user get by wrong id', (done) => {
 
             const userGet = {
-                userId: ""
-                //userId: 243455
+                userId: 2454
                 //userId: generateId()
             };
             const postData = {
@@ -182,13 +179,10 @@ describe('USER GET BY ID', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
-                    const respData = res.body;
-
-                    console.log("RESP BODY USER GET BY ID ===", respData)
-                    expect(respData.userGetById._id).eq(userId)
-                    //expect(respData.userGetById.firstName).eq(arg.userInput.firstName)
-                    //expect(respData.userGetById.lastName).eq(arg.userInput.lastName)
-
+                    const respData = res.body.errors[0]
+                    console.log('RESP BODY USER GET BY ID ===', respData);
+                    expect(respData.message).eq('Cast to ObjectId failed for value "2454" (type string) at path "_id" for model "User"')
+                    expect(respData.extensions.code).to.eq('INTERNAL_SERVER_ERROR')
                     done();
                 });
         });
@@ -196,12 +190,11 @@ describe('USER GET BY ID', () => {
     });
 
     describe('USER GET BY ID - NEGATIVE 3', () => {
-        //let userId = null;
 
-        // before('user delete all', (done) => {
-        //     User.deleteMany({})
-        //     return done();
-        // });
+        before('user delete all', (done) => {
+            User.deleteMany({})
+            return done();
+        });
 
         before('user create', (done) => {
             const postData = {
@@ -227,31 +220,26 @@ describe('USER GET BY ID', () => {
                 });
         });
 
-        it.skip('user get by wrong id', (done) => {
+        it('user get by null id', (done) => {
 
             const userGet = {
-                userId: 243455
-                };
+                userId: null
+            };
             const postData = {
                 query: userGetByIdQ,
                 variables: userGet,
             };
             requestGql(postData)
 
-                .expect(200)
+                .expect(400)
                 .end((err, res) => {
                     if (err) return done(err);
-                    const respData = res.body;
-
-                    console.log("RESP BODY USER GET BY ID ===", respData)
-                    expect(respData.userGetById._id).eq(userId)
-                    //expect(respData.userGetById.firstName).eq(arg.userInput.firstName)
-                    //expect(respData.userGetById.lastName).eq(arg.userInput.lastName)
-
+                    const respData = res.body.errors[0]
+                    console.log('RESP BODY USER GET BY ID ===', respData);
+                    expect(respData.message).eq('Variable "$userId" of non-null type "ID!" must not be null.')
+                    expect(respData.extensions.code).to.eq('BAD_USER_INPUT')
                     done();
                 });
         });
-
     });
-
 })

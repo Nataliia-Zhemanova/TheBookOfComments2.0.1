@@ -5,6 +5,7 @@ const userCreateM = `mutation UserCreate($userInput: UserItems) {
     lastName
   }
 }`
+// new field email or firstName3
 
 const userGetByIdQ = `query UserGetById($userId: ID!) {
   userGetById(userId: $userId) {

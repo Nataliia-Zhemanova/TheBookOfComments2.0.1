@@ -3,7 +3,7 @@ const {expect} = require ('chai')
 // const graphQLEndpoint = 'http://localhost:5000/graphql'
 const { requestGql } = require('../../helper')
 const { userCreateM, usersGetAllQ } = require('./queries')
-const { arg, arg2 } = require('./data')
+const { arg, arg2, arg2N } = require('./data')
 //const generateId = require('../../../utils/generateId')
 const User = require('../User')
 describe('USERS GET ALL', () => {
@@ -42,14 +42,14 @@ describe('USERS GET ALL', () => {
 //             }
 
 
-           // request(graphQLEndpoint)
+            // request(graphQLEndpoint)
             requestGql(postData)
                 // .post('/')
                 // //.post('http://localhost:5000/graphql')
                 // .send(postData)
                 .expect(200)
                 .end((err, res) => {
-                    if(err) return done(err);
+                    if (err) return done(err);
                     const respData = res.body.data
                     console.log("RESP BODY ===", respData)
                     //expect(respData.userCreate.firstName).eq('firstName')
@@ -59,32 +59,28 @@ describe('USERS GET ALL', () => {
                 })
         })
         it('users get all', (done) => {
-
-
             const postData = {
                 query: usersGetAllQ,
                 variables: arg2,
             };
-
-
-            //     const arg = {
-  //               amount: 3,
-  //           };
-  //           const postData = {
-  //               query: `query UsersGetAll($amount: Int) {
-  // usersGetAll(amount: $amount) {
-  //   _id
-  //   firstName
-  //   lastName
-  // }
-  //           }`,
-  //               variables: arg
-  //           };
+            //        const arg = {
+            //           amount: 3,
+            //           };
+            //           const postData = {
+            //               query: `query UsersGetAll($amount: Int) {
+            // usersGetAll(amount: $amount) {
+            //   _id
+            //   firstName
+            //   lastName
+            // }
+            //           }`,
+            //               variables: arg
+            //           };
             requestGql(postData)
 
-               //   .post('/')
-               //.post('http://localhost:5000/graphql')
-               // .send(postData)
+                //   .post('/')
+                //.post('http://localhost:5000/graphql')
+                // .send(postData)
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
@@ -100,7 +96,48 @@ describe('USERS GET ALL', () => {
                 });
         });
     });
-    describe('USERs GET ALL - NEGATIVE', () => {});
 
+    describe('USERS GET ALL - NEGATIVE', () => {
+        describe('USER GET ALL - NEGATIVE', () => {
+
+            before('user delete all', (done) => {
+                User.deleteMany({})
+                return done();
+            });
+
+            before('user create', (done) => {
+                const postData = {
+                    query: userCreateM,
+                    variables: arg,
+                };
+
+                requestGql(postData)
+                    .expect(200)
+                    .end((err, res) => {
+                        if (err) return done(err);
+                        const respData = res.body.data
+                        console.log("RESP BODY ===", respData)
+                        done()
+
+                    })
+            })
+            it('users get all', (done) => {
+                const postData = {
+                    query: usersGetAllQ,
+                    variables: arg2N,
+                };
+
+                requestGql(postData)
+                    .expect(400)
+                    .end((err, res) => {
+                        if (err) return done(err);
+                        const respData = res.body.errors[0]
+                        console.log("RESP BODY ===", respData)
+                        expect(respData.message).eq('Variable "$amount" got invalid value "hello"; Int cannot represent non-integer value: "hello"')
+                        expect(respData.extensions.code).to.eq('BAD_USER_INPUT')
+                        done();
+                    });
+            });
+        });
+    });
 })
-
