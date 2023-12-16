@@ -2,7 +2,6 @@ const {expect} = require('chai')
 const{requestGql} = require('../../helper');
 const{userCreateM, userUpdateByIdM} = require('./queries');
 const{arg} = require('./data');
-
 describe('USER UPDATE BY ID', () => {
     describe('USER UPDATE BY ID - POSITIVE', () => {
         let userId = null;
@@ -44,13 +43,10 @@ describe('USER UPDATE BY ID', () => {
                     expect(respData.userGetById._id).eq(userId)
                     expect(respData.userGetById.firstName).eq(user.userInput.firstName)
                     expect(respData.userGetById.lastName).eq(user.userInput.lastName)
-
                     done()
-
                 })
         })
     })
     describe('USER UPDATE BY ID - NEGATIVE', () => {
-
     })
 })

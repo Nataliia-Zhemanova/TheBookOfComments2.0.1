@@ -5,7 +5,7 @@ const {requestGql} = require("../../helper");
 describe('USER DELETE BY ID', () =>{
     describe('USER DELETE BY ID - POSITIVE', () => {
         let userId = null;
-        it('user create', (done) =>{
+        it('user create', (done) => {
             const postData = {
                 query: userCreateM,
                 variables: arg,
@@ -21,7 +21,6 @@ describe('USER DELETE BY ID', () =>{
                     done()
                 })
         })
-
         it('user delete by id', (done) => {
             const user = {
                 userId: userId,
