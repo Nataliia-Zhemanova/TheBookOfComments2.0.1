@@ -1,6 +1,6 @@
 const {expect} = require('chai')
 const {requestGql}  = require ('../../helper')
-const { userCreateM } = require ('./query')
+const { userCreateM, userCreateNegM} = require ('./query')
 const { arg, argNeg} = require ('./data')
 
 describe('USER CREATE', () => {
@@ -43,6 +43,21 @@ describe('USER CREATE', () => {
                     expect(res.statusCode).to.eq(400)
                     done()
                 })
+        });
+
+        it('Create user with not existing query input', (done) => {
+          const postData = {
+              query: userCreateNegM,
+              variables: arg
+          }
+          requestGql(postData)
+              .expect(400)
+              .end((err, res) => {
+                  if(err) return done(err)
+                  const respData = res.body.errors
+                  expect(respData[0].message).to.eq('Cannot query field "_id1" on type "User". Did you mean "_id"?')
+                  done()
+              })
         });
 
     });

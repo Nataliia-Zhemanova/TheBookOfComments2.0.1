@@ -6,5 +6,13 @@ const userCreateM = `mutation UserCreate($userInput: UserItems) {
   }
 }`
 
-module.exports = { userCreateM }
+const userCreateNegM = `mutation UserCreate($userInput: UserItems) {
+  userCreate(userInput: $userInput) {
+    _id1
+    firstName
+    lastName
+  }
+}`
+
+module.exports = { userCreateM, userCreateNegM }
 
