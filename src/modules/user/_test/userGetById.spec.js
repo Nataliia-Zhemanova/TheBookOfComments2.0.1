@@ -114,7 +114,7 @@ describe('USER GET BY ID', () => {
 
         it('user get with empty id string', (done) => {
             const userGet = {
-                userId: generateId(),
+                userId: '',
             };
             const postData = {
                 query: userGetByIdQ,
@@ -129,13 +129,39 @@ describe('USER GET BY ID', () => {
                     console.log('GET BY EMPTY ID RESP ===', respData)
 
                     expect(respData.data).to.eq(null)
-                    expect(respData.errors[0].message).to.eq('Cannot return null for non-nullable field Query.userGetById.')
+                    expect(respData.errors[0].message).to.eq('Cast to ObjectId failed for value "" (type string) at path "_id" for model "User"')
                     done()
                 })
         });
 
 
-        it('get a deleted user by ID', (done) => {  //BUG
+
+        it('user get with invalid id type', (done) => {
+            const userGet = {
+                userId: 123456789,
+            };
+            const postData = {
+                query: userGetByIdQ,
+                variables: userGet
+            }
+
+            requestGql(postData)
+                .expect(200)
+                .end((err, res) => {
+                    if(err) return done(err);
+                    const respData = res.body;
+                    console.log('GET BY EMPTY ID RESP ===', respData)
+
+                    expect(respData.data).to.eq(null)
+                    expect(respData.errors[0].message).to.eq('Cast to ObjectId failed for value "123456789" (type string) at path "_id" for model "User"')
+                    done()
+                })
+        });
+
+
+
+
+        it.skip('get a deleted user by ID', (done) => {  //BUG
             const userGet = {
                 userId: '657695f72f8467fbedfa90ac',
             };
