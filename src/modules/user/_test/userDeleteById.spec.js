@@ -1,9 +1,9 @@
-const request = require('supertest')
 const {expect} = require('chai')
-const graphQlEndpoint = 'http://localhost:5000/graphql'
-const {userCreateArg, userDeleteArg} = require ('../_test/data')
+const {userCreateArg} = require ('../_test/data')
 const {userCreateQuery, userDeleteQ} = require('../_test/quey')
 const {gqlRequest} = require('../../user/helper')
+const generateId = require('../../../utils/generateId')
+
 
 describe('DELETE USER BY ID', () => {
     describe('DELETE USER BY ID - POSITIVE', () => {
@@ -42,7 +42,8 @@ describe('DELETE USER BY ID', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err)
-                    const respData = res.body
+                    const respData = res.body.data
+                    expect(respData.userDeleteById).to.eq(true)
                     console.log(respData)
                     done()
                 })
@@ -50,6 +51,44 @@ describe('DELETE USER BY ID', () => {
     })
 
     describe('UPDATE USER BY ID - NEGATIVE', () => {
+        it('Delete user with not existing id', (done) => {
+            const userDeleteArg = {
+                userId: generateId()
+            }
+            const postData = {
+                query: userDeleteQ,
+                variables: userDeleteArg
 
+            }
+            gqlRequest(postData)
+                .expect(200)
+                .end((err, res) => {
+                    if (err) return done(err)
+                    const respData = res.body.data
+                    expect(respData.userDeleteById).to.eq(false)
+                    console.log(respData)
+                    done()
+                })
+        });
+
+        it('Delete user with empty user Id field', (done) => {
+            const userDeleteArg = {
+                userId: ""
+            }
+            const postData = {
+                query: userDeleteQ,
+                variables: userDeleteArg
+
+            }
+            gqlRequest(postData)
+                .expect(200)
+                .end((err, res) => {
+                    if (err) return done(err)
+                    const respData = res.body.data
+                    expect(respData.userDeleteById).to.eq(null)
+                    console.log(respData)
+                    done()
+                })
+        });
     });
 });
