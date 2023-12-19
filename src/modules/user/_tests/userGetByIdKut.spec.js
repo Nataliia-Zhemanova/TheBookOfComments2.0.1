@@ -6,8 +6,8 @@ const generateId = require('../../../utils/generateId')
 const User = require ('../User')
 
 describe('GET USER BY ID', () => {
+    let userId = null;
     describe('GET USER BY ID - POSITIVE', () => {
-        let userId = null;
 
         before('user create', (done) => {
 
@@ -51,7 +51,7 @@ describe('GET USER BY ID', () => {
     })
 
     describe('GET USER BY ID - NEGATIVE', () => {
-        let userId = null;
+
         before('delete all users', (done) => {
             User.deleteMany({})
             return done()
