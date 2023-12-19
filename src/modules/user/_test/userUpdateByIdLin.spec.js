@@ -22,7 +22,7 @@ describe('USER UPDATE BY ID', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
-                    const respData = res.body.data
+
                     done()
                 })
         })
@@ -43,7 +43,7 @@ describe('USER UPDATE BY ID', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
-                    const respData = res.body.data;
+
                     expect(respData.userUpdateById._id).eq(userId)
                     done();
                 });

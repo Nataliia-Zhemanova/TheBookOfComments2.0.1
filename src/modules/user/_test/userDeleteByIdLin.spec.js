@@ -22,7 +22,6 @@ describe('USER DELETE BY ID', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
-                    const respData = res.body.data;
                     userId = res.body.data.userCreate._id
                     done();
                 });
@@ -65,7 +64,6 @@ describe('USER DELETE BY ID', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
-                    const respData = res.body.data;
                     userId = res.body.data.userCreate._id
                     done();
                 });
