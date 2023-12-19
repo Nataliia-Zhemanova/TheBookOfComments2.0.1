@@ -23,9 +23,7 @@ describe('USERS GET ALL', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
-                    const respData = res.body.data
                     done()
-
                 })
         })
         it('users get all', (done) => {
@@ -64,7 +62,6 @@ describe('USERS GET ALL', () => {
                     .expect(200)
                     .end((err, res) => {
                         if (err) return done(err);
-                        const respData = res.body.data
                         done()
 
                     })
