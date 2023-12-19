@@ -14,5 +14,8 @@ const wrongArg = {
     }
 }
 
+const usersGetAllArg = {
+    amount: 10
+}
 
-module.exports = { arg, wrongArg }
+module.exports = { arg, wrongArg, usersGetAllArg }
