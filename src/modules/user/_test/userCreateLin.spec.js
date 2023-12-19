@@ -37,7 +37,6 @@ describe('USER CREATE', () => {
                     .end((err, res) => {
                         if (err) return done(err);
                         const respData = res.body.errors[0]
-
                         expect(respData.message).eq('Variable "$userInput" got invalid value 555 at "userInput.firstName"; String cannot represent a non string value: 555')
                         expect(respData.extensions.code).to.eq('BAD_USER_INPUT')
                         done();

@@ -24,7 +24,6 @@ describe('USERS GET ALL', () => {
                 .end((err, res) => {
                     if (err) return done(err);
                     const respData = res.body.data
-                    console.log("RESP BODY ===", respData)
                     done()
 
                 })
@@ -42,7 +41,6 @@ describe('USERS GET ALL', () => {
                     const respData = res.body.data;
                     expect(respData.usersGetAll.length).not.eq(0)
                     expect(respData.usersGetAll.length).eq(arg2.amount)
-                    console.log(respData.usersGetAll.length)
                     done();
                 });
         });
@@ -67,7 +65,6 @@ describe('USERS GET ALL', () => {
                     .end((err, res) => {
                         if (err) return done(err);
                         const respData = res.body.data
-                        console.log("RESP BODY ===", respData)
                         done()
 
                     })
@@ -83,7 +80,6 @@ describe('USERS GET ALL', () => {
                     .end((err, res) => {
                         if (err) return done(err);
                         const respData = res.body.errors[0]
-                        console.log("RESP BODY ===", respData)
                         expect(respData.message).eq('Variable "$amount" got invalid value "hello"; Int cannot represent non-integer value: "hello"')
                         expect(respData.extensions.code).to.eq('BAD_USER_INPUT')
                         done();

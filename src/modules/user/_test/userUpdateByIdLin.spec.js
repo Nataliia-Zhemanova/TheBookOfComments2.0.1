@@ -23,9 +23,6 @@ describe('USER UPDATE BY ID', () => {
                 .end((err, res) => {
                     if (err) return done(err);
                     const respData = res.body.data
-                    console.log("RESP BODY ===", respData)
-                    //expect(respData.userCreate.firstName).eq('firstName')
-                    //expect(respData.userCreate.lastName).eq('lastName')
                     done()
                 })
         })
@@ -47,8 +44,6 @@ describe('USER UPDATE BY ID', () => {
                 .end((err, res) => {
                     if (err) return done(err);
                     const respData = res.body.data;
-
-                    console.log("RESP BODY USER UPDATE BY ID ===", respData)
                     expect(respData.userUpdateById._id).eq(userId)
                     done();
                 });
@@ -73,7 +68,6 @@ describe('USER UPDATE BY ID', () => {
                     .end((err, res) => {
                         if (err) return done(err);
                         const respData = res.body.data
-                        console.log("RESP BODY ===", respData)
                         done()
                     })
             })
@@ -89,7 +83,6 @@ describe('USER UPDATE BY ID', () => {
                     .end((err, res) => {
                         if (err) return done(err);
                         const respData = res.body.errors[0]
-                        console.log('RESP BODY USER GET BY ID ===', respData);
                         expect(respData.extensions.code).to.eq('BAD_USER_INPUT')
                         done();
                     });
