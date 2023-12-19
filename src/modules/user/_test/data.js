@@ -1,17 +1,25 @@
-//to input data
-const faker = require('faker')
-
-// const arg = {
-//     "userInput": {
-//         firstName: 'TestFirstName',
-//         lastName: 'TestLastName'
-//     }
-// }
+const faker = require("faker")
 
 const arg = {
-    "userInput": {
+    userInput: {
         firstName: faker.name.firstName(),
-        lastName: faker.name.lastName()
+        lastName: faker.name.lastName(),
     }
 }
-module.exports = { arg }
+
+const userInput = {
+    userInput: {
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+    },
+};
+
+const userInvInput = {
+    userInput: {
+        firstName: 1,
+        lastName: null,
+    },
+};
+
+module.exports = { arg, userInput, userInvInput }
+

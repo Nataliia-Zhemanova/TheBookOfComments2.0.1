@@ -14,11 +14,10 @@ const userGetById = async (_, {userId: id}) => {
   const analyticsId = analytics('USER_GET_BY_ID_ERROR', {
     error: result.payload,
     user: userId,
-    //controller: 'userGetById',
   });
   throw new GraphQLError('User get error', {
     extensions: message.fail(null, analyticsId),
   });
 }
 
-module.exports = userGetById
+module.exports = userGetById;
