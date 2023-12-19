@@ -16,7 +16,6 @@ describe('USER CREATE', () => {
                 .end((err, res) => {
                     if(err) return done(err);
                     const respData = res.body.data
-                    console.log("RESP BODY ====", respData)
                     expect(respData.userCreate.firstName).eq(arg.userInput.firstName)
                     expect(respData.userCreate.lastName).eq(arg.userInput.lastName)
                     done()
@@ -36,7 +35,6 @@ describe('USER CREATE', () => {
                 .end((err, res) => {
                     if(err) return done(err);
                     const respData = res.body.errors[0]
-                    console.log("====", respData)
                     expect(respData.message).eq('GraphQL operations must contain a non-empty `query` or a `persistedQuery` extension.')
                     expect(respData.extensions.code).to.eq('INTERNAL_SERVER_ERROR')
                     done()
@@ -54,7 +52,6 @@ describe('USER CREATE', () => {
                 .end((err, res) => {
                     if(err) return done(err);
                     const respData = res.error
-                    console.log("second ====", respData)
                     expect(respData.text).eq('GraphQL queries must be strings.')
                     expect(respData.status).to.eq(400)
                     done()
