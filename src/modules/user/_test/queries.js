@@ -14,4 +14,12 @@ const userGetByIdQ = `query UserGetById($userId: ID!) {
   }
 }`
 
-module.exports = { userCreateM, userGetByIdQ }
+const userGetByIdQInvalid = `query UserGetById($userId: ID!) {
+  userGetById(userId: $userId) {
+    _id123
+    firstName
+    lastName
+  }
+}`
+
+module.exports = { userCreateM, userGetByIdQ, userGetByIdQInvalid }
