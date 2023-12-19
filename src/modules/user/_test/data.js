@@ -7,4 +7,12 @@ const arg = {
     }
 }
 
-module.exports = { arg }
+const wrongArg = {
+    userInput: {
+        firstName: 123,
+        lastName: 123,
+    }
+}
+
+
+module.exports = { arg, wrongArg }
