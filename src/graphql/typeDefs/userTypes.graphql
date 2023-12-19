@@ -1,35 +1,35 @@
 type User {
-_id: ID!
-firstName: String
-lastName: String
-comments: [Comment]
+    _id: ID!
+    firstName: String
+    lastName: String
+    comments: [Comment]
 }
 
 input UserFields {
-_id: ID!
-firstName: String
-lastName: String
+    _id: ID!
+    firstName: String
+    lastName: String
 }
 
 input UserFieldsInComment {
-userId: ID
-firstName: String
-lastName: String
+    userId: ID
+    firstName: String
+    lastName: String
 }
 
 input UserItems {
-firstName: String
-lastName: String
+    firstName: String
+    lastName: String
 }
 
 type Query {
-usersGetAll(amount: Int): [User]
-userGetById(userId: ID!): User!
+    usersGetAll(amount: Int): [User]
+    userGetById(userId: ID!): User!
 }
 
 type Mutation {
-userCreate(userInput: UserItems): User
-userUpdateById(userInput: UserFields): User
-userDeleteById(userId: ID!): Boolean
+    userCreate(userInput: UserItems): User
+    userUpdateById(userInput: UserFields): User
+    userDeleteById(userId: ID!): Boolean
 }
 
