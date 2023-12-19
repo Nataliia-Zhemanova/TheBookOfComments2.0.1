@@ -1,5 +1,11 @@
+const faker = require("faker")
 
-const faker = require('faker');
+const arg = {
+    userInput: {
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+    }
+}
 
 const userInput = {
     userInput: {
@@ -15,21 +21,5 @@ const userInvInput = {
     },
 };
 
-module.exports = {userInput, userInvInput};
-
-const faker = require('faker')
-
-const arg = {
-  userInput: {
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName()
-  }
-}
-const arg = {
-    "userInput": {
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName()
-    }
-}
-module.exports = { arg }
+module.exports = { arg, userInput, userInvInput }
 

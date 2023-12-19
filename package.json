@@ -3,19 +3,17 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-
+    "test: userCreate": "cross-env PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userCreateBir.spec.js --timeout 20000 --exit",
     "test1": "cross-env PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userCreate.specNaz.js --timeout 20000 --exit",
     "test2": "cross-env PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userGetById.specNaz.js --timeout 20000 --exit",
     "test3": "cross-env PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userGetAll.specNaz.js --timeout 20000 --exit",
     "test4": "cross-env PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userUpdateById.specNaz.js --timeout 20000 --exit",
     "test5": "cross-env PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userDeleteById.specNaz.js --timeout 20000 --exit",
-
     "test": "PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userCreateRug.spec.js --timeout 20000 --exit",
     "userGetById": "PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userGetByIdRug.spec.js --timeout 20000 --exit",
     "userDeletetById": "PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userDeleteByIdRug.spec.js --timeout 20000 --exit",
     "userUpdateById": "PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userUpdateByIdRug.spec.js --timeout 20000 --exit",
     "usersGetAll": "PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/usersGetAllRug.spec.js --timeout 20000 --exit",
-
     "local": "cross-env NODE_ENV=local nodemon --inspect -r dotenv/config -r src/index.js",
     "start": "nodemon src/index.js",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'"
@@ -43,10 +41,5 @@
     "prettier": "^3.1.0",
     "supertest": "^6.3.3"
   },
-  "devDependencies": {
-    "cross-env": "^7.0.3",
-    "faker": "^5.5.3"
-  },
-
   "description": ""
 }

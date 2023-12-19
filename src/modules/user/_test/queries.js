@@ -4,15 +4,13 @@ const userCreateM = `mutation UserCreate($userInput: UserItems) {
     firstName
     lastName
   }
-}`;
-
+}`
 
 const userGetByIdQ = `query UserGetById($userId: ID!) {
   userGetById(userId: $userId) {
     _id
     firstName
     lastName
-
   } 
 }`;
 
@@ -30,9 +28,6 @@ const userDeleteByIdM =
   userDeleteById(userId: $userId)
 }`;
 
-module.exports = {userCreateM, userGetByIdQ, userGetAllQ, userDeleteByIdM};
-  }
-}`
 
 const userGetAllQ = `query UsersGetAll($amount: Int) {
   usersGetAll(amount: $amount) {
@@ -53,8 +48,6 @@ const userUpdateByIdM = `mutation UserUpdateById($userInput: UserFields) {
 const userDeleteByIdM = `mutation UserDeleteById($userId: ID!) {
   userDeleteById(userId: $userId)
 }`
-
-module.exports = { userCreateM, userGetByIdQ, userGetAllQ, userUpdateByIdM, userDeleteByIdM }
 
 const userCreateQuery = `mutation UserCreate($userInput: UserItems) {
             userCreate(userInput: $userInput) {
@@ -104,4 +97,5 @@ const errorMassage = [
 
 const nullAmount = null
 
-module.exports = { userCreateQuery, userGetById, userDeleteByIdM, getAllUsers, userUpdateById, errorMassage, nullAmount }
+module.exports = {userCreateM, userGetByIdQ, userGetAllQ, userDeleteByIdM, userCreateQuery, userGetById, getAllUsers, userUpdateById, errorMassage, nullAmount }
+
