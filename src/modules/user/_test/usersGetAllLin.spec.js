@@ -21,7 +21,7 @@ describe('USERS GET ALL', () => {
 
             requestGql(postData)
                 .expect(200)
-                .end((err, res) => {
+                .end((err) => {
                     if (err) return done(err);
                     done()
                 })
@@ -60,7 +60,7 @@ describe('USERS GET ALL', () => {
 
                 requestGql(postData)
                     .expect(200)
-                    .end((err, res) => {
+                    .end((err) => {
                         if (err) return done(err);
                         done()
 
