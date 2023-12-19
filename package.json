@@ -12,7 +12,7 @@
     "start": "nodemon src/index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Nataliia Zhemanova",
   "license": "ISC",
   "dependencies": {
     "@graphql-tools/load-files": "^7.0.0",
