@@ -1,5 +1,3 @@
-const request = require('supertest');
-const gqlEndPoint = 'http://localhost:5000/'
 const {userCreateM, getUserByIdQ} = require ('./query')
 const {userCreateArg} = require('./data')
 const {gqlRequest} = require('../helper')
@@ -24,7 +22,6 @@ describe('GET USER BY ID', () => {
                     if (err) return done(err)
                     const respData = res.body.data
                     userId = respData.userCreate._id
-                    console.log(respData)
                     done()
                 })
         })
@@ -44,7 +41,6 @@ describe('GET USER BY ID', () => {
                 .end((err, res) => {
                     if (err) return done(err)
                     const respData = res.body.data
-                    console.log(respData)
                     expect(respData.userGetById._id).to.eq(userId)
                     expect(respData.userGetById.firstName).to.eq(userCreateArg.userInput.firstName)
                     expect(respData.userGetById.lastName).to.eq(userCreateArg.userInput.lastName)
@@ -73,7 +69,6 @@ describe('GET USER BY ID', () => {
                     if (err) return done(err)
                     const respData = res.body.data
                     userId = respData.userCreate._id
-                     // console.log(respData)
                     done()
                 })
           })
@@ -91,7 +86,6 @@ describe('GET USER BY ID', () => {
                 .end((err, res) => {
                     if (err) return done(err)
                     const respData = res.body
-                    console.log(respData)
                     expect(respData.data).to.eq(null)
                     expect(respData.errors[0].message).to.eq('Cannot return null for non-nullable field Query.userGetById.')
                     done()
@@ -111,7 +105,6 @@ describe('GET USER BY ID', () => {
                 .end((err, res) => {
                     if (err) return done(err)
                     const respData = res.body
-                    console.log(respData)
                     expect(respData.data).to.eq(null)
                     expect(respData.errors[0].message).to.eq('Cast to ObjectId failed for value "" (type string) at path "_id" for model "User"')
                     done()
