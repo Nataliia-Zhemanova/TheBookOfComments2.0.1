@@ -65,7 +65,7 @@ describe('USER UPDATE BY ID', () => {
 
                 requestGql(postData)
                     .expect(200)
-                    .end((err, res) => {
+                    .end((err) => {
                         if (err) return done(err);
                         done()
                     })
