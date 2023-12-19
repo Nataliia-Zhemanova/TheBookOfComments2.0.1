@@ -4,8 +4,6 @@ const analytics = require('../../analytics/analytics');
 
 const userGetByIdQuery = (userId) => {
   return User.findById(userId)
-    // .populate({ path: 'roles', select: 'name _id' })
-    // .lean()
     .exec()
     .then((user) => {
       if (user) {
