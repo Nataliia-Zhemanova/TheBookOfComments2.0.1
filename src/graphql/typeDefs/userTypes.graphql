@@ -6,7 +6,7 @@ type User {
 }
 
 input UserFields {
-    userId: ID!
+    _id: ID!
     firstName: String
     lastName: String
 }
