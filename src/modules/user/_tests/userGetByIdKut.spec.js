@@ -1,4 +1,4 @@
-const {userCreateM, getUserByIdQ} = require ('./query')
+const {userCreateM, getUserByIdQ, getUserByIdNeg} = require ('./query')
 const {userCreateArg} = require('./data')
 const {gqlRequest} = require('../helper')
 const {expect} = require("chai");
@@ -110,5 +110,42 @@ describe('GET USER BY ID', () => {
                     done()
                 })
         });
+
+        it('Update user with invalid query', (done) => {
+            const userGet = {
+                userId: userId
+            }
+            const postData = {
+                query: getUserByIdNeg,
+                variables: userGet
+            }
+            gqlRequest(postData)
+                .expect(400)
+                .end((err, res) => {
+                    if (err) return done(err)
+                    const respData = res.body.errors
+                     expect(respData[0].message).to.eq('Cannot query field "_id1" on type "User". Did you mean "_id"?')
+                    done()
+                })
+        });
+
+        it('Update user with wrong type of variables', (done) => {
+            const userGet = {
+                userId: 234523
+            }
+            const postData = {
+                query: getUserByIdQ,
+                variables: userGet
+            }
+            gqlRequest(postData)
+                .expect(200)
+                .end((err, res) => {
+                    if (err) return done(err)
+                    const respData = res.body.errors
+                     expect(respData[0].message).to.eq('Cast to ObjectId failed for value "234523" (type string) at path "_id" for model "User"')
+                    done()
+                })
+        });
+
     });
 });
