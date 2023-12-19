@@ -1,4 +1,53 @@
-//queries for requests-response structure
+const userCreateM = `mutation UserCreate($userInput: UserItems) {
+  userCreate(userInput: $userInput) {
+    _id
+    firstName
+    lastName
+  }
+}`
+
+const userGetByIdQ = `query UserGetById($userId: ID!) {
+  userGetById(userId: $userId) {
+    _id
+    firstName
+    lastName
+  } 
+}`;
+
+const userGetAllQ =
+    `query UsersGetAll {
+        usersGetAll {
+            _id
+            firstName
+            lastName
+        }
+    }`;
+
+const userDeleteByIdM =
+    `mutation UserDeleteById($userId: ID!) {
+  userDeleteById(userId: $userId)
+}`;
+
+
+const userGetAllQ = `query UsersGetAll($amount: Int) {
+  usersGetAll(amount: $amount) {
+    _id
+    firstName
+    lastName
+  }
+}`
+
+const userUpdateByIdM = `mutation UserUpdateById($userInput: UserFields) {
+  userUpdateById(userInput: $userInput) {
+    _id
+    firstName
+    lastName
+  }
+}`
+
+const userDeleteByIdM = `mutation UserDeleteById($userId: ID!) {
+  userDeleteById(userId: $userId)
+}`
 
 const userCreateQuery = `mutation UserCreate($userInput: UserItems) {
             userCreate(userInput: $userInput) {
@@ -48,8 +97,5 @@ const errorMassage = [
 
 const nullAmount = null
 
+module.exports = {userCreateM, userGetByIdQ, userGetAllQ, userDeleteByIdM, userCreateQuery, userGetById, getAllUsers, userUpdateById, errorMassage, nullAmount }
 
-
-
-
-module.exports = { userCreateQuery, userGetById, userDeleteByIdM, getAllUsers, userUpdateById, errorMassage, nullAmount }

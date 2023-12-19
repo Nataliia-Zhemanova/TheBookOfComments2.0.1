@@ -21,4 +21,4 @@ const userGetById = async (_, {userId: id}) => {
   });
 }
 
-module.exports = userGetById
+module.exports = userGetById;
