@@ -129,6 +129,8 @@ describe('GET USER BY ID', () => {
                 })
         });
 
+        // Probably BUG (expected: 400, got: 200)
+
         it('Update user with wrong type of variables', (done) => {
             const userGet = {
                 userId: 234523
