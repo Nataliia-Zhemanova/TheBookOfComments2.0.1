@@ -84,6 +84,7 @@ describe('USER UPDATE BY ID', () => {
                         if (err) return done(err);
                         const respData = res.body.errors[0]
                         expect(respData.extensions.code).to.eq('BAD_USER_INPUT')
+                        expect(respData.message).eq('Variable "$userInput" got invalid value { firstName: 555, lastName: 888 }; Field "_id" of required type "ID!" was not provided.')
                         done();
                     });
             });

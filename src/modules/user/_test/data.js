@@ -15,7 +15,7 @@ const arg2N = {
 const argN1 = {
       userInput: {
           firstName: 555,
-          lastName: faker.name.lastName(),
+          lastName: 888,
       },
 };
 
