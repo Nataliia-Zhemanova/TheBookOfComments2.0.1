@@ -1,14 +1,14 @@
-const Comment = require('../Comment')
-const commentCreate = require('./commentCreate')
-const commentDeleteById = require('./commentDeleteById')
-const commentGetAll = require('./commentGetAll')
-const commentGetById = require('./commentGetById')
-const commentUpdateById = require('./commentUpdateById')
+const Comment = require("../Comment");
+const commentCreate = require("./commentCreate");
+const commentDeleteById = require("./commentDeleteById");
+const commentGetAll = require("./commentGetAll");
+const commentGetById = require("./commentGetById");
+const commentUpdateById = require("./commentUpdateById");
 const User = require("../../user/User");
 
 const commentResolvers = {
   Comment: {
-    user: async ({user}) => User.findById(user)
+    user: async ({ user }) => User.findById(user),
   },
 
   Query: {
@@ -19,7 +19,7 @@ const commentResolvers = {
     commentCreate,
     commentUpdateById,
     commentDeleteById,
-  }
-}
+  },
+};
 
-module.exports = commentResolvers
+module.exports = commentResolvers;
