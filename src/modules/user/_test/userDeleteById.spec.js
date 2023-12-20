@@ -9,7 +9,7 @@ describe('DELETE USER BY ID', () => {
     describe('DELETE USER BY ID - POSITIVE', () => {
         let userId = null
 
-        it('Create user', (done) => {
+        before('Create user', (done) => {
 
             const postData = {
                 query: userCreateQuery,
