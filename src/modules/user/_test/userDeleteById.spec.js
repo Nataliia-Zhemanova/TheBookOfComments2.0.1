@@ -26,19 +26,19 @@ describe('USER DELETE BY ID', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
-                    const respData = res.body.data
                     userId = res.body.data.userCreate._id
-
-                    console.log("RESP BODY ===", respData)
-                    console.log("USER ID ===", userId)
                     done()
                 })
         })
 
         it('delete user by id', (done) => {
+            const deleteUser = {
+                userId: userId
+            }
+
             const postData = {
-                query: userGetByIdQ,
-                variables: userId
+                query: userDeleteByIdM,
+                variables: deleteUser
             }
 
             requestGql(postData)
@@ -46,11 +46,8 @@ describe('USER DELETE BY ID', () => {
                 .end((err, res) => {
                     if(err) return done(err);
                     const respData = res.body.data
-                    //const userId = res.body.data.userDeleteById._id
-                    console.log("RESP BODY USER GET BY ID ===", respData)
 
-                    expect(respData).eq(true)
-
+                    expect(respData.userDeleteById).eq(true)
                     done()
                 })
         });
@@ -58,6 +55,64 @@ describe('USER DELETE BY ID', () => {
 
 
     describe('USER DELETE BY ID - NEGATIVE', () => {
+        let userId = null;
 
+        before('user create', (done) => {
+            const postData = {
+                query: userCreateM,
+                variables: arg,
+            }
+
+            requestGql(postData)
+                .expect(200)
+                .end((err, res) => {
+                    if (err) return done(err);
+                    userId = res.body.data.userCreate._id
+                    done()
+                })
+        })
+
+        it('delete user by id', (done) => {
+            const deleteUser = {
+                userId: generateId()
+            }
+
+            const postData = {
+                query: userDeleteByIdM,
+                variables: deleteUser
+            }
+
+            requestGql(postData)
+                .expect(200)
+                .end((err, res) => {
+                    if(err) return done(err);
+                    const respData = res.body.data
+
+                    expect(respData.userDeleteById).eq(false)
+                    done()
+                })
+        });
+
+        it('delete user by id', (done) => {
+            const deleteUser = {
+                userId: 12234567890
+            }
+
+            const postData = {
+                query: userDeleteByIdM,
+                variables: deleteUser
+            }
+
+            requestGql(postData)
+                .expect(200)
+                .end((err, res) => {
+                    if(err) return done(err);
+                    const respData = res.body
+
+                    expect(respData.errors[0].message).eq('Cast to ObjectId failed for value "12234567890" (type string) at path "_id" for model "User"')
+                    expect(respData.data.userDeleteById).eq(null)
+                    done()
+                })
+        });
     });
 });
