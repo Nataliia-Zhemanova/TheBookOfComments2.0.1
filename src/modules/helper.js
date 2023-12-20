@@ -8,3 +8,4 @@ function requestGql (postData) {
 }
 
 module.exports = { requestGql }
+

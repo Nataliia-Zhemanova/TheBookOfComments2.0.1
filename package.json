@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "test: userGetById": "cross-env PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userGetByIdBir.spec.js --timeout 20000 --exit",
     "test: userCreate": "cross-env PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userCreateBir.spec.js --timeout 20000 --exit",
     "test1": "cross-env PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userCreate.specNaz.js --timeout 20000 --exit",
     "test2": "cross-env PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userGetById.specNaz.js --timeout 20000 --exit",

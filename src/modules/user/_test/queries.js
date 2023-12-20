@@ -11,8 +11,16 @@ const userGetByIdQ = `query UserGetById($userId: ID!) {
     _id
     firstName
     lastName
-  } 
-}`;
+  }
+}`
+
+const userGetByIdQInvalid = `query UserGetById($userId: ID!) {
+  userGetById(userId: $userId) {
+    _id123
+    firstName
+    lastName
+  }
+}`
 
 const userGetAllQ =
     `query UsersGetAll {
@@ -97,5 +105,5 @@ const errorMassage = [
 
 const nullAmount = null
 
-module.exports = {userCreateM, userGetByIdQ, userGetAllQ, userDeleteByIdM, userCreateQuery, userGetById, getAllUsers, userUpdateById, errorMassage, nullAmount }
+module.exports = {userCreateM, userGetByIdQ, userGetAllQ, userDeleteByIdM, userCreateQuery, userGetById, getAllUsers, userUpdateById, errorMassage, nullAmount, userGetByIdQInvalid }
 
