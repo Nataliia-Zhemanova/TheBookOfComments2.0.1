@@ -3,7 +3,6 @@ const {requestGql} = require ('../../helper')
 const {userCreateM, usersGetAllQ } = require ('./queries')
 const { arg, usersGetAllArg } = require ('./data')
 const User = require('../User')
-// const generateId = require('../../../utils/generateId')
 
 describe('USERS GET ALL', () => {
 
@@ -68,20 +67,19 @@ describe('USERS GET ALL', () => {
                 })
         })
 
-        it('user get all', (done) => {
+        it('user get all with wrong argument type', (done) => {
             const postData = {
                 query: usersGetAllQ,
-                variables: usersGetAllArg
+                variables: '10'
             }
 
             requestGql(postData)
-                .expect(200)
+                .expect(400)
                 .end((err, res) => {
                     if(err) return done(err);
-                    const respData = res.body.data
+                    const respData = res.body
 
-                    expect(respData.usersGetAll.length).not.to.eq(0)
-                    expect(respData.usersGetAll.length).eq(usersGetAllArg.amount)
+                    expect(respData.errors[0].message).eq('Variables must be provided as an Object where each property is a variable value. Perhaps look to see if an unparsed JSON string was provided.')
                     done()
                 })
         });
