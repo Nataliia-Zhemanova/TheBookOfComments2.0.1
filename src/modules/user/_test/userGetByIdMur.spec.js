@@ -23,8 +23,6 @@ describe ('USER GET BY ID', () => {
                     if (err) return done(err);
                     const respData = res.body;
                     userId = res.body.data.userCreate._id;
-                    console.log("RESP BODY ===", respData);
-                    console.log("USER ID ===", userId);
                     done()
                 });
         });
@@ -41,7 +39,6 @@ describe ('USER GET BY ID', () => {
                 .end((err, res) => {
                     if (err) return done(err);
                     const respData = res.body.data;
-                    console.log("RESP BODY USER GET BY ID ===", respData);
                     expect (respData.userGetById._id).eq(userId);
                     expect (respData.userGetById.firstName).eq(userInput.userInput.firstName);
                     expect (respData.userGetById.lastName).eq(userInput.userInput.lastName);
@@ -66,8 +63,6 @@ describe ('USER GET BY ID', () => {
                     if (err) return done(err);
                     const respData = res.body;
                     userId = res.body.data.userCreate._id;
-                    console.log("RESP BODY ===", respData);
-                    console.log("USER ID ===", userId);
                     done()
                 });
         });
@@ -83,11 +78,9 @@ describe ('USER GET BY ID', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
-                    const respData = res.body.data;
-                    console.log("RESP BODY USER GET BY ID ===", respData);
-                    // expect (respData.userGetById._id).eq(userId);
-                    // expect (respData.userGetById.firstName).eq(userInput.userInput.firstName);
-                    // expect (respData.userGetById.lastName).eq(userInput.userInput.lastName);
+                    const respData = res.body.errors[0];
+                    expect(respData.message).eq('Cannot return null for non-nullable field Query.userGetById.')
+                    expect(respData.extensions.code).to.eq('INTERNAL_SERVER_ERROR');
                     done();
                 });
             });
