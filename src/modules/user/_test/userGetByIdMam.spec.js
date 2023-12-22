@@ -150,7 +150,6 @@ describe('USER GET BY ID', () => {
                 .end((err, res) => {
                     if(err) return done(err);
                     const respData = res.body;
-                    console.log('GET BY EMPTY ID RESP ===', respData)
 
                     expect(respData.data).to.eq(null)
                     expect(respData.errors[0].message).to.eq('Cast to ObjectId failed for value "123456789" (type string) at path "_id" for model "User"')

@@ -66,27 +66,12 @@ describe('USER UPDATE BY ID', () => {
     });
 
     describe('USER UPDATE BY ID - NEGATIVE', () => {
-        let userId = null;
 
         before('user delete all', (done) => {
             User.deleteMany({})
             return done()
         })
 
-        before('user create', (done) => {
-            const postData = {
-                query: userCreateM,
-                variables: arg,
-            }
-
-            requestGql(postData)
-                .expect(200)
-                .end((err, res) => {
-                    if (err) return done(err);
-                    userId = res.body.data.userCreate._id
-                    done()
-                })
-        })
 
         it('user update by invalid ID', (done) => {
             const userUpdateWrongId = {

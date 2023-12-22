@@ -39,6 +39,7 @@ describe('USERS GET ALL', () => {
                     if(err) return done(err);
                     const respData = res.body.data
 
+                    expect(respData.usersGetAll).to.be.an('array')
                     expect(respData.usersGetAll.length).not.to.eq(0)
                     expect(respData.usersGetAll.length).eq(usersGetAllArg.amount)
                     done()

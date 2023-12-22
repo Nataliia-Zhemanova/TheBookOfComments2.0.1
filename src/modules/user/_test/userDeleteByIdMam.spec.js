@@ -93,7 +93,7 @@ describe('USER DELETE BY ID', () => {
                 })
         });
 
-        it('delete user by id', (done) => {
+        it('delete user by wrong id type', (done) => {
             const deleteUser = {
                 userId: 12234567890
             }
