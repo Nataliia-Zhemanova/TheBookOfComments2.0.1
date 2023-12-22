@@ -4,7 +4,16 @@
   "main": "index.js",
   "scripts": {
 GQL01-userCreate-APItest-Jalalov
+GQL01-userCreate-APItest-Jalalov
     "test": "cross-env PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userCreateJal.spec.js --timeout 20000 --exit",
+
+ GQL02-userGetById-APItest-Murzabayev
+    "userCreate": "PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userCreateMur.spec.js --timeout 20000 --exit",
+    "userGetById": "PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userGetByIdMur.spec.js --timeout 20000 --exit",
+    "usersGetAll": "PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/usersGetAllMur.spec.js --timeout 20000 --exit",
+    "usersUpdateById": "PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userUpdateByIdMur.js --timeout 20000 --exit",
+    "usersDeleteById": "PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userDeleteByIdMur.js --timeout 20000 --exit",
+main
 
     "test: userGetById": "cross-env PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userGetByIdBir.spec.js --timeout 20000 --exit",
     "test: userCreate": "cross-env PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userCreateBir.spec.js --timeout 20000 --exit",
@@ -18,6 +27,10 @@ GQL01-userCreate-APItest-Jalalov
     "userDeletetById": "PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userDeleteByIdRug.spec.js --timeout 20000 --exit",
     "userUpdateById": "PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userUpdateByIdRug.spec.js --timeout 20000 --exit",
     "usersGetAll": "PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/usersGetAllRug.spec.js --timeout 20000 --exit",
+GQL01-userCreate-APItest-Jalalov
+main
+
+ main
 main
     "local": "cross-env NODE_ENV=local nodemon --inspect -r dotenv/config -r src/index.js",
     "start": "nodemon src/index.js",
