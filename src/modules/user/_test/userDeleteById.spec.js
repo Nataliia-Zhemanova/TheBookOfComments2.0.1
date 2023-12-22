@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const {requestGql} = require ('../../helper')
-const {userCreateM, userDeleteByIdM, userGetByIdQ} = require ('./queries')
+const {userCreateM, userDeleteByIdM } = require ('./queries')
 const { arg } = require ('./data')
 const User = require('../User')
 const generateId = require('../../../utils/generateId')
@@ -11,10 +11,10 @@ describe('USER DELETE BY ID', () => {
     describe('USER DELETE BY ID - POSITIVE', () => {
         let userId = null;
 
-        // before('user delete all', (done) => {
-        //     User.deleteMany({})
-        //     return done()
-        // })
+        before('user delete all', (done) => {
+            User.deleteMany({})
+            return done()
+        })
 
         before('user create', (done) => {
             const postData = {
@@ -72,7 +72,7 @@ describe('USER DELETE BY ID', () => {
                 })
         })
 
-        it('delete user by id', (done) => {
+        it('delete user by generated id', (done) => {
             const deleteUser = {
                 userId: generateId()
             }
