@@ -5,9 +5,14 @@ const userCreateM = `mutation UserCreate($userInput: UserItems) {
     lastName
   }
 }`
+GQL01-userCreate-APItest-Jalalov
+GQL01-userCreate-APItest-Jalalov
+module.exports = {userCreateM}
+
  GQL02-userGetById-APItest-Murzabayev
 
 
+main
 main
 const userGetByIdQ = `query UserGetById($userId: ID!) {
   userGetById(userId: $userId) {
@@ -121,5 +126,6 @@ const errorMassage = [
 const nullAmount = null
 
 module.exports = {userCreateM, userGetByIdQ, userGetAllQ, userDeleteByIdM, userCreateQuery, userGetById, getAllUsers, userUpdateById, errorMassage, nullAmount, userGetByIdQInvalid }
+main
 
 main

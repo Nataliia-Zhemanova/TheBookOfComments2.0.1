@@ -16,6 +16,15 @@ const arg = {
 module.exports = { userInput, }
 
 
+GQL01-userCreate-APItest-Jalalov
+const userIncorrectType  = {
+    userInput: {
+        firstName: faker.name.firstName(),
+        lastName: 123,
+    }
+}
+
+module.exports = {arg, userIncorrectType}
 const userInput = {
     userInput: {
         firstName: faker.name.firstName(),
@@ -31,4 +40,8 @@ const userInvInput = {
 };
 
 module.exports = { arg, userInput, userInvInput }
- main
+GQL01-userCreate-APItest-Jalalov
+main
+
+main
+main
