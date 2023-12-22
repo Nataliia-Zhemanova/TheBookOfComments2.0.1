@@ -90,5 +90,25 @@ describe('DELETE USER BY ID', () => {
                     done()
                 })
         });
+          // Probably Bug
+        it.skip('Delete user with wrong type of Id field', (done) => {
+            const userDeleteArg = {
+                userId: 34314534
+            }
+            const postData = {
+                query: userDeleteQ,
+                variables: userDeleteArg
+
+            }
+            gqlRequest(postData)
+                .expect(400)
+                .end((err, res) => {
+                    if (err) return done(err)
+                    const respData = res.body
+                    // expect(respData.userDeleteById).to.eq(null)
+                    console.log(respData)
+                    done()
+                })
+        });
     });
 });
