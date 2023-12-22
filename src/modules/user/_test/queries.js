@@ -5,7 +5,10 @@ const userCreateM = `mutation UserCreate($userInput: UserItems) {
     lastName
   }
 }`
+ GQL02-userGetById-APItest-Murzabayev
 
+
+main
 const userGetByIdQ = `query UserGetById($userId: ID!) {
   userGetById(userId: $userId) {
     _id
@@ -13,6 +16,11 @@ const userGetByIdQ = `query UserGetById($userId: ID!) {
     lastName
   }
 }`
+ GQL02-userGetById-APItest-Murzabayev
+const userDeleteByIdM = `mutation UserDeleteById($userId: ID!) {
+  userDeleteById(userId: $userId)
+}`
+
 
 const userGetByIdQInvalid = `query UserGetById($userId: ID!) {
   userGetById(userId: $userId) {
@@ -37,6 +45,7 @@ const userDeleteByIdM =
 }`;
 
 
+main
 const userGetAllQ = `query UsersGetAll($amount: Int) {
   usersGetAll(amount: $amount) {
     _id
@@ -44,7 +53,10 @@ const userGetAllQ = `query UsersGetAll($amount: Int) {
     lastName
   }
 }`
+ GQL02-userGetById-APItest-Murzabayev
 
+
+ main
 const userUpdateByIdM = `mutation UserUpdateById($userInput: UserFields) {
   userUpdateById(userInput: $userInput) {
     _id
@@ -52,6 +64,9 @@ const userUpdateByIdM = `mutation UserUpdateById($userInput: UserFields) {
     lastName
   }
 }`
+
+ GQL02-userGetById-APItest-Murzabayev
+    module.exports = { userCreateM, userGetByIdQ, userDeleteByIdM, userGetAllQ, userUpdateByIdM}
 
 const userDeleteByIdM = `mutation UserDeleteById($userId: ID!) {
   userDeleteById(userId: $userId)
@@ -107,3 +122,4 @@ const nullAmount = null
 
 module.exports = {userCreateM, userGetByIdQ, userGetAllQ, userDeleteByIdM, userCreateQuery, userGetById, getAllUsers, userUpdateById, errorMassage, nullAmount, userGetByIdQInvalid }
 
+main
