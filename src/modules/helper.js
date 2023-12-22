@@ -7,4 +7,9 @@ function requestGql (postData) {
         .send(postData)
 }
 
+GQL01-userCreate-APItest-Jalalov
 module.exports = { requestGql }
+
+module.exports = { requestGql }
+
+main

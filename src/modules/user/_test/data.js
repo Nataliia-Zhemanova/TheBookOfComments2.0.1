@@ -7,6 +7,7 @@ const arg = {
     }
 }
 
+GQL01-userCreate-APItest-Jalalov
 const userIncorrectType  = {
     userInput: {
         firstName: faker.name.firstName(),
@@ -15,3 +16,19 @@ const userIncorrectType  = {
 }
 
 module.exports = {arg, userIncorrectType}
+const userInput = {
+    userInput: {
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+    },
+};
+
+const userInvInput = {
+    userInput: {
+        firstName: 1,
+        lastName: null,
+    },
+};
+
+module.exports = { arg, userInput, userInvInput }
+main
