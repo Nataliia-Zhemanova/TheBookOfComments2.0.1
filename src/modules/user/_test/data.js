@@ -1,33 +1,40 @@
+
+const faker = require('faker')
+
+const userCreateArg = {
+    userInput: {
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName()
+    }
+}
+
+module.exports = {userCreateArg}
+
+ GQL02-userGetById-APItest-Murzabayev
 const faker = require('faker');
 
 const userInput = {
 
+const faker = require("faker")
+
 const arg = {
+ main
     userInput: {
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
     }
 }
-
-const wrongArg = {
-    userInput: {
-        firstName: 123,
-
+ GQL02-userGetById-APItest-Murzabayev
 module.exports = { userInput, }
 
 
+GQL01-userCreate-APItest-Jalalov
 const userIncorrectType  = {
     userInput: {
         firstName: faker.name.firstName(),
         lastName: 123,
     }
 }
-
-const usersGetAllArg = {
-    amount: 10
-}
-
-module.exports = { arg, wrongArg, usersGetAllArg }
 
 module.exports = {arg, userIncorrectType}
 const userInput = {
