@@ -21,8 +21,6 @@ describe('DELETE USER BY ID', () => {
                     if (err) return done(err)
                     const respData = res.body.data
                     userId = respData.userCreate._id
-                    console.log(userId)
-                    console.log(respData)
                     done()
                 })
 
@@ -44,7 +42,6 @@ describe('DELETE USER BY ID', () => {
                     if (err) return done(err)
                     const respData = res.body.data
                     expect(respData.userDeleteById).to.eq(true)
-                    console.log(respData)
                     done()
                 })
         });
@@ -66,7 +63,6 @@ describe('DELETE USER BY ID', () => {
                     if (err) return done(err)
                     const respData = res.body.data
                     expect(respData.userDeleteById).to.eq(false)
-                    console.log(respData)
                     done()
                 })
         });
@@ -86,7 +82,6 @@ describe('DELETE USER BY ID', () => {
                     if (err) return done(err)
                     const respData = res.body.data
                     expect(respData.userDeleteById).to.eq(null)
-                    console.log(respData)
                     done()
                 })
         });
@@ -106,7 +101,6 @@ describe('DELETE USER BY ID', () => {
                     if (err) return done(err)
                     const respData = res.body
                     // expect(respData.userDeleteById).to.eq(null)
-                    console.log(respData)
                     done()
                 })
         });
