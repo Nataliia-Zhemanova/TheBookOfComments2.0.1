@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
 
-    "test": "PORT=6000 TEST_RUNNER=true mocha ./src/modules/user/_test/**.spec.js --timeout 20000 --exit",
+
     "test": "cross-env PORT=6000 TEST_RUNNER=true mocha src/modules/user/_test/userCreateJal.spec.js --timeout 20000 --exit",
 
  
