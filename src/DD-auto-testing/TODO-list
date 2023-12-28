@@ -1,11 +1,16 @@
 1. add babel // TODO find the solution
 2. create a class instead of functions
-3. explore Apollo
+3. explore Apollo studio
 4. fix DB swiping (after all hook)
-5. explore Apollo studio
-6. ask about updates:
-    -   comments
-    -   authorization
-    -   updateUser bug fixing
-7. install and config prettier
-8. install chance instead of faker
+5. install and config prettier
+6. install chance instead of faker
+
+
+Questions:
+
+1. what is a query
+2. how to make a negative tests
+3. does comments feature works?
+4. will authorization be added?
+5. if yes - which kind of authorization?
+6. updateUser bug ?

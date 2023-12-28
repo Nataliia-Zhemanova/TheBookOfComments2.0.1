@@ -1,6 +1,6 @@
 const {expect} = require('chai')
 const { createUserArgs, } = require('../../helpers/args')
-const {createUser} = require("../../helpers/userHelper");
+const {createUser, createNegativeUser} = require("../../helpers/userHelper");
 
 
 
@@ -19,9 +19,14 @@ describe('create user', () => {
             expect(resBody.lastName).to.eq(createUserArgs.userInput.lastName)
         });
     });
-    describe('negative', () => {
-        // it('', () => {
-        //
-        // });
+    describe.skip('negative', () => {
+        let res, resBody
+        before(async() => {
+            res = await createNegativeUser(123, 'testLastName')
+            resBody = res.body.data.userCreate
+        });
+        it('verify user cannot be created w/o first name', () => {
+            expect(resBody.firstName).to.eq('')
+        });
     });
 });

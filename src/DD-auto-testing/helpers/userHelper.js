@@ -1,6 +1,7 @@
 const {requestGql} = require('./generalHelper')
 const {createUserArgs, userGetAllArgs, userDeleteArgs, userGetByIdArgs} = require('./args')
 const {userCreateQuery, userGetAllQuery, userDeleteQuery, userGetByIdQuery} = require('./queries')
+const faker = require("faker");
 
 
 function createUser(){
@@ -9,6 +10,19 @@ function createUser(){
         variables: createUserArgs
     }
    return requestGql(postData)
+}
+
+function createNegativeUser(firstName, lastName){
+    const postData = {
+        query: userCreateQuery,
+        variables: {
+            "userInput": {
+                firstName,
+                lastName,
+            }
+        }
+    }
+    return requestGql(postData)
 }
 
 function getAllUsers(){
@@ -38,4 +52,4 @@ function getUserById(userId){
 
 
 
-module.exports = {createUser, getAllUsers, deleteUser, getUserById}
+module.exports = {createUser, getAllUsers, deleteUser, getUserById, createNegativeUser}
