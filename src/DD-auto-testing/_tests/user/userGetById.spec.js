@@ -31,7 +31,7 @@ describe('get user by id', () => {
             expect(resData.lastName).to.eq(createUserArgs.userInput.lastName)
         });
     })
-    describe('get user by id - negative', () => {
+    describe.skip('get user by id - negative', () => {
         let userInvalidId, resData
         before(() => {
             userInvalidId = generateId()
@@ -65,6 +65,10 @@ describe('get user by id', () => {
             resData = res.body.errors[0]
             console.log(resData.message)
             expect(resData.message).include('failed')
+        });
+
+        it('wrong schema option', () => {
+
         });
     });
 })

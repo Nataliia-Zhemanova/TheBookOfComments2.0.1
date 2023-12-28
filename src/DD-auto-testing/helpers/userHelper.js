@@ -1,13 +1,13 @@
 const {requestGql} = require('./generalHelper')
-const {createUserArgs, userGetAllArgs, userDeleteArgs, userGetByIdArgs} = require('./args')
+const {userCreateArgs, userGetAllArgs, userDeleteArgs, userGetByIdArgs} = require('./args')
 const {userCreateQuery, userGetAllQuery, userDeleteQuery, userGetByIdQuery} = require('./queries')
 const faker = require("faker");
 
 
-function createUser(){
+function createUser(query = userCreateQuery(), variables=userCreateArgs()){
     const postData = {
-        query: userCreateQuery,
-        variables: createUserArgs
+        query,
+        variables,
     }
    return requestGql(postData)
 }

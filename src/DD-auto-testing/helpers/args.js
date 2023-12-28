@@ -1,9 +1,11 @@
 const faker = require('faker')
 
-const createUserArgs = {
-    "userInput": {
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
+function userCreateArgs(firstName=faker.name.firstName(), lastName=faker.name.lastName()){
+    return {
+        "userInput": {
+            firstName,
+            lastName,
+        }
     }
 }
 
@@ -19,4 +21,4 @@ function userGetByIdArgs(userId){
     return {userId}
 }
 
-    module.exports = { createUserArgs, userGetAllArgs, userDeleteArgs, userGetByIdArgs }
+    module.exports = { userCreateArgs, userGetAllArgs, userDeleteArgs, userGetByIdArgs }

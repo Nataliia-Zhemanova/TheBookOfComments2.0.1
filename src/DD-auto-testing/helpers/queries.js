@@ -1,12 +1,14 @@
 
 
-const userCreateQuery = `mutation UserCreate($userInput: UserItems) {
+function userCreateQuery(id='_id', firstName='firstName', lastName='lastName'){
+    return `mutation UserCreate($userInput: UserItems) {
                             userCreate(userInput: $userInput) {
-                                  _id
-                                   firstName
-                                   lastName
+                                  ${id}
+                                  ${firstName}
+                                  ${lastName}                                   
                             }
                         }`
+}
 
 const userDeleteQuery = `mutation UserDeleteById($userId: ID!) {
                           userDeleteById(userId: $userId)
