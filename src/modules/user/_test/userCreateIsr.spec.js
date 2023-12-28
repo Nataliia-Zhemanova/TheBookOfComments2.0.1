@@ -42,5 +42,21 @@ describe ('USER CREATE', () => {
         })
     })
     describe ('USER CREATE - NEGATIVE', () => {
+        it('user update with empty query', (done) => {
+            const postData = {
+                query: ``,
+                variables: arg
+            }
+            requestGql(postData)
+                .expect(400)
+                .end((err, res) => {
+                    if (err) return done(err);
+                    const respData = res.body.errors[0]
+                    console.log('RESP BODY ===', respData);
+                    expect(respData.message).eq('GraphQL operations must contain a non-empty `query` or a `persistedQuery` extension.')
+                    expect(respData.extensions.code).eq('INTERNAL_SERVER_ERROR')
+                    done()
+                })
+        })
        })
     })
