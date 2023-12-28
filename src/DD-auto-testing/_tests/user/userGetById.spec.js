@@ -4,7 +4,7 @@ const {requestGql} = require("../../helpers/generalHelper");
 const {userCreateQuery, userGetByIdQuery} = require("../../helpers/queries");
 const {createUserArgs, userGetByIdArgs} = require('../../helpers/args')
 const graphQLEndpoint = 'http://localhost:5000/graphql'
-const User = require('../../user/User')
+const User = require('../../../modules/user/User')
 const {createUser} = require("../../helpers/userHelper");
 
 describe('get user by id', () => {
