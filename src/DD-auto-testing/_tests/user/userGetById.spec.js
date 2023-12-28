@@ -1,11 +1,9 @@
 const generateId = require('../../../utils/generateId')
 const {expect} = require('chai')
 const {requestGql} = require("../../helpers/generalHelper");
-const {userCreateQuery, userGetByIdQuery} = require("../../helpers/queries");
-const {createUserArgs, userGetByIdArgs} = require('../../helpers/args')
-const graphQLEndpoint = 'http://localhost:5000/graphql'
-const User = require('../../../modules/user/User')
-const {createUser} = require("../../helpers/userHelper");
+const {userGetByIdQuery} = require("../../helpers/queries");
+const {userGetByIdArgs, createUserArgs} = require('../../helpers/args')
+const {createUser, getUserById} = require("../../helpers/userHelper");
 
 describe('get user by id', () => {
     let res, resData, userId
@@ -22,7 +20,7 @@ describe('get user by id', () => {
                 query: userGetByIdQuery,
                 variables: userGetByIdArgs(userId)
             }
-            res = await requestGql(postGetData)
+            res = await getUserById(userId)
             resData = res.body.data.userGetById
         });
         it('verify user id', async() => {
@@ -42,32 +40,22 @@ describe('get user by id', () => {
             userInvalidId = generateId()
         })
         it('verify get user by non-existing id', async() => {
-            const postGetData = {
-                query: userGetByIdQuery,
-                variables: userGetByIdArgs(userInvalidId)
-            }
-            res = await requestGql(postGetData)
+            res = await getUserById(userInvalidId)
 
             resData = res.body.errors[0]
             console.log(resData.message)
             expect(resData.message).include('null')
         });
         it('get user w/o id', async() => {
-            const postGetData = {
-                query: userGetByIdQuery,
-                variables: userGetByIdArgs('')
-            }
-            res = await requestGql(postGetData)
+
+            res = await getUserById('')
             resData = res.body.errors[0]
             console.log(resData.message)
             expect(resData.message).include('failed')
         });
         it('get user with number id', async() => {
-            const postGetData = {
-                query: userGetByIdQuery,
-                variables: userGetByIdArgs(1)
-            }
-            res = await requestGql(postGetData)
+
+            res = await getUserById(1)
             resData = res.body.errors[0]
             console.log(resData.message)
             expect(resData.message).include('failed')
@@ -75,11 +63,8 @@ describe('get user by id', () => {
 
         // double check userId types / userId argument doesn't accept object and array / status code 400
         it('get user with invalid id type', async() => {
-            const postGetData = {
-                query: userGetByIdQuery,
-                variables: userGetByIdArgs("testId")
-            }
-            res = await requestGql(postGetData)
+
+            res = await getUserById('test')
             resData = res.body.errors[0]
             console.log(resData.message)
             expect(resData.message).include('failed')

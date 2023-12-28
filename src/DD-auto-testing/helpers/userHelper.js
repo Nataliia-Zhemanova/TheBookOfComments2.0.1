@@ -32,6 +32,7 @@ function getUserById(userId){
         query: userGetByIdQuery,
         variables: userGetByIdArgs(userId)
     }
+    return requestGql(postData)
 }
 
 
