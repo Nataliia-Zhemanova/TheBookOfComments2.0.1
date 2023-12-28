@@ -8,11 +8,13 @@ const {createUser, getUserById} = require("../../helpers/userHelper");
 describe('get user by id', () => {
     let res, resData, userId
     describe('get user by id - positive', () => {
+        // TODO refactor to async/await and make it work
         // before('delete all users', (done)=>{
         //     User.deleteMany({})
         //     return done()
         // })
         before(async() => {
+            // await User.deleteMany({}) // TODO fix "User is not defined" error
             res = await createUser()
             userId  = res.body.data.userCreate._id
             res = await getUserById(userId)

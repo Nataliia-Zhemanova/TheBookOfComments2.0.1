@@ -8,3 +8,4 @@
     -   authorization
     -   updateUser bug fixing
 7. install and config prettier
+8. install chance instead of faker
