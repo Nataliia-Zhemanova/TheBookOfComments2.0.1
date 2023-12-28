@@ -12,19 +12,6 @@ function createUser(query = userCreateQuery(), variables=userCreateArgs()){
    return requestGql(postData)
 }
 
-function createNegativeUser(firstName, lastName){
-    const postData = {
-        query: userCreateQuery,
-        variables: {
-            "userInput": {
-                firstName,
-                lastName,
-            }
-        }
-    }
-    return requestGql(postData)
-}
-
 function getAllUsers(){
     const postData = {
         query: userGetAllQuery,

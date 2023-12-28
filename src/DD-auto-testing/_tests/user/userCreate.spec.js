@@ -1,6 +1,6 @@
 const {expect} = require('chai')
 const { userCreateArgs, } = require('../../helpers/args')
-const {createUser, createNegativeUser} = require("../../helpers/userHelper");
+const {createUser} = require("../../helpers/userHelper");
 const {userCreateQuery} = require("../../helpers/queries");
 const faker = require("faker");
 
