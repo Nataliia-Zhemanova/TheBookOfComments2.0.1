@@ -22,6 +22,7 @@ describe ('USER UPDATE', () => {
         })
     })
     describe ('USER UPDATE - NEGATIVE', () => {
-    } )
-} )
+
+    })
+})
 

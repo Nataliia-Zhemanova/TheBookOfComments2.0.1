@@ -1,7 +1,3 @@
-// const qraphQLEndpoint = 'http://localhost:5000/graphql'
-// const request = require ("supertest")
-// Убрали потому что импортировали
-
 const {expect} = require ('chai');
 const {requestGql} = require('../../helper');
 const {userCreateMutation, userGetByIdQ} = require('./queries');
@@ -19,7 +15,6 @@ describe ('USER GET BY ID', () => {
         before('user create', (done) =>{
             const postData = {
                 query: userCreateMutation,
-
                 variables:  arg,
             };
             requestGql(postData)
@@ -33,44 +28,15 @@ describe ('USER GET BY ID', () => {
                     done()
                 })
         })
-
-        // it('user create', (done) => {
-        //         const postData = {
-        //             query: userCreateMutation,
-        //
-        //         variables:  arg,
-        //     };
-        //         requestGql(postData)
-        //             .expect(200)
-        //             .end((err, res) => {
-        //             if(err) return done(err);
-        //             const respData = res.body.data
-        //             userId = res.body.data.userCreate._id
-        //             console.log('RESP BODY ===', respData);
-        //             console.log('USER ID ===', userId);
-        //             done()
-        //         })
-        // })
-
         it("user get by id", (done) => {
         const userGet = {
             userId: userId,
         };
         const postData = {
             query: userGetByIdQ,
-                                                // query: `query UserGetById($userId: ID!) {
-                                                // userGetById(userId: $userId) {
-                                                // _id
-                                                // firstName
-                                                // lastName
-                                                // }
-                                                // }`,
             variables:  userGet
         };
-            requestGql(postData)                // request(qraphQLEndpoint)
-                                                // .post('/')
-                                                // .send(postData)
-                                                // Убрали потому что импортировали
+            requestGql(postData)
             .expect(200)
             .end((err, res) => {
                 if(err) return done(err);
@@ -83,7 +49,7 @@ describe ('USER GET BY ID', () => {
             })
     })
 })
-    describe ('USER GET BY ID - NEGATIVE', () => {
+    describe('USER GET BY ID - NEGATIVE', () => {
         let userId = null;
         before('user delete all', (done) =>{
             User.deleteMany({})
@@ -92,8 +58,7 @@ describe ('USER GET BY ID', () => {
         before('user create', (done) =>{
             const postData = {
                 query: userCreateMutation,
-
-                variables:  arg,
+                variables:  arg
             };
             requestGql(postData)
                 .expect(200)
@@ -118,11 +83,9 @@ describe ('USER GET BY ID', () => {
                 .expect(200)
                 .end((err, res) => {
                     if(err) return done(err);
-                    const respData = res.body.data
+                    const respData = res.body.errors[0]
                     console.log('RESP BODY USER GET BY ID ===', respData);
-                    // expect(respData.userGetById._id).eq(userId)
-                    // expect(respData.userGetById.firstName).eq(arg.userInput.firstName)
-                    // expect(respData.userGetById.lastName).eq(arg.userInput.lastName)
+                    expect(respData.message).eq('Cannot return null for non-nullable field Query.userGetById.')
                     done()
                 })
         })

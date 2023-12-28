@@ -44,7 +44,7 @@ describe ('USER CREATE', () => {
                 userInput: {
                     firstName: null,
                     lastName: 123
-            }
+                }
             }
             const postData = {
                 query: userCreateMutation,
