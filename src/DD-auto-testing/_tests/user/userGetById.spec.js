@@ -15,11 +15,6 @@ describe('get user by id', () => {
         before(async() => {
             res = await createUser()
             userId  = res.body.data.userCreate._id
-
-            const postGetData = {
-                query: userGetByIdQuery,
-                variables: userGetByIdArgs(userId)
-            }
             res = await getUserById(userId)
             resData = res.body.data.userGetById
         });
