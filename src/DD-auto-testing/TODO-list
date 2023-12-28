@@ -1,9 +1,10 @@
-1. add babel
+1. add babel // TODO find the solution
 2. create a class instead of functions
 3. explore Apollo
 4. fix DB swiping (after all hook)
 5. explore Apollo studio
-6. as about updates:
+6. ask about updates:
     -   comments
     -   authorization
-    -   bug fixing
+    -   updateUser bug fixing
+7. install and config prettier

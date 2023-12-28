@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env PORT=6000 TEST_RUNNER=true mocha src/DD-auto-testing/_tests/**/*.spec.js --timeout 20000 --exit",
-    "oneTest": "cross-env PORT=6000 TEST_RUNNER=true mocha src/DD-auto-testing/_tests/user/userDelete.spec.js --timeout 20000 --exit",
+    "oneTest": "cross-env PORT=6000 TEST_RUNNER=true mocha src/DD-auto-testing/_tests/user/userCreate.spec.js --timeout 20000 --exit",
     "local": "cross-env NODE_ENV=local nodemon --inspect -r dotenv/config -r src/index.js",
     "start": "nodemon src/index.js"
   },
