@@ -15,14 +15,12 @@ describe('delete user', () => {
         });
 
         it('verify user delete successfully', async() => {
-            const postDeleteData = {
-                query: userDeleteQuery,
-                variables: userDeleteArgs(userId)
-            }
 
-            res = await requestGql(postDeleteData)
 
-            // res = deleteUser(userId)
+            res = await deleteUser(userId)
+
+            console.log(res.body)
+
             const resBody = res.body.data.userDeleteById
             expect(resBody).eq(true)
         });
