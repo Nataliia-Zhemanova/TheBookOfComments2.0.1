@@ -39,4 +39,4 @@ function getUserById(userId){
 
 
 
-module.exports = {createUser, getAllUsers, deleteUser, getUserById, createNegativeUser}
+module.exports = {createUser, getAllUsers, deleteUser, getUserById,}

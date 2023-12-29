@@ -10,7 +10,7 @@ describe('create user', () => {
     describe('positive', () => {
         let res, resBody, requestBody
         before(async() => {
-            res = await createUser(userCreateQuery(), userCreateArgs())
+            res = await createUser()
 
             requestBody = res.request._data.variables.userInput
 
