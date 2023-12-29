@@ -33,12 +33,14 @@ function userGetAllQuery(id='_id', firstName='firstName', lastName='lastName'){
                         }`
 }
 
-//TODO turn to a function
-const userDeleteQuery = `mutation UserDeleteById($userId: ID!) {
+
+function userDeleteQuery(){
+    return `mutation UserDeleteById($userId: ID!) {
                           userDeleteById(userId: $userId)
                         }`
+}
 
 
 
 
-    module.exports = { userCreateQuery, userDeleteQuery, userGetByIdQuery, userGetAllQuery }
+module.exports = { userCreateQuery, userDeleteQuery, userGetByIdQuery, userGetAllQuery }

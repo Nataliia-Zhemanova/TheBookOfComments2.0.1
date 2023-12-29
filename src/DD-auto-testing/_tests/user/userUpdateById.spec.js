@@ -3,6 +3,7 @@ const {expect} = require('chai')
 const graphQLEndpoint = 'http://localhost:5000/graphql'
 
 // this spec skipped because of existing bug
+// TODO reformat the test once bug will be fixed
 describe.skip('user update by id', () => {
     describe('user update by id - positive', () => {
         let res, userId, userFirstName, userLastName, updateArg, resBody

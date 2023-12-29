@@ -1,8 +1,5 @@
 const generateId = require('../../../utils/generateId')
 const {expect} = require('chai')
-const {requestGql} = require("../../helpers/generalHelper");
-const {userGetByIdQuery} = require("../../helpers/queries");
-const {userGetByIdArgs, userCreateArgs} = require('../../helpers/args')
 const {createUser, getUserById} = require("../../helpers/userHelper");
 // const User = require('../../../modules/user/User') // not sure if this import actually required
 
