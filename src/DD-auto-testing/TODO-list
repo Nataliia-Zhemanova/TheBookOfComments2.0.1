@@ -1,18 +1,21 @@
 1. add babel // TODO find the solution
 2. create a class instead of functions
-3. explore Apollo studio
-4. fix DB swiping (after all hook)
+3. explore Apollo studio // TODO find the guidelines
+4. fix DB swiping (after all hook) //TODO find the way to connect DB and use proper command
 5. install and config prettier
-6. install chance instead of faker
+6. install chance instead of faker // TODO fix chance import
+7. refactor import to `import * from...`
 
 
 Questions:
 
 1. what is a resolver ?
 2. negative tests types?
-3. does comments feature works?
+3. when will comments feature works?
 4. will authorization be added?
 5. if yes - which kind of authorization?
 6. updateUser bug ?
 7. negative scenarios - validate only error messages?
 8. schema related test ?
+9. why do we need GQL plugin?
+10. why can't update inside of WS?
