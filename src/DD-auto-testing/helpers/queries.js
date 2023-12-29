@@ -22,16 +22,18 @@ function userGetByIdQuery(id='_id', firstName='firstName', lastName='lastName'){
 }
 
 
-//TODO turn to a function
-const userGetAllQuery = `query UsersGetAll($amount: Int) {
+
+function userGetAllQuery(id='_id', firstName='firstName', lastName='lastName'){
+    return `query UsersGetAll($amount: Int) {
                           usersGetAll(amount: $amount) {
-                            _id
-                            firstName
-                            lastName
+                             ${id}
+                             ${firstName}
+                             ${lastName}  
                           }
                         }`
+}
 
-
+//TODO turn to a function
 const userDeleteQuery = `mutation UserDeleteById($userId: ID!) {
                           userDeleteById(userId: $userId)
                         }`

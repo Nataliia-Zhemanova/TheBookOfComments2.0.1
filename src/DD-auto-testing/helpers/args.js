@@ -13,9 +13,8 @@ function userGetByIdArgs(userId){
     return {userId}
 }
 
-// TODO turn to a function
-const userGetAllArgs = {
-    amount: 4
+function userGetAllArgs(amount=4) {
+    return{amount: amount}
 }
 
 function userDeleteArgs(userId) {

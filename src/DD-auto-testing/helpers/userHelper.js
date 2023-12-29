@@ -21,10 +21,10 @@ function getUserById(userId, query = userGetByIdQuery()){
 }
 
 
-function getAllUsers(){
+function userGetAll(amount){
     const postData = {
-        query: userGetAllQuery,
-        variables: userGetAllArgs
+        query: userGetAllQuery(),
+        variables: userGetAllArgs(amount)
     }
     return requestGql(postData)
 }
@@ -40,4 +40,4 @@ function deleteUser(userId){
 
 
 
-module.exports = {createUser, getAllUsers, deleteUser, getUserById,}
+module.exports = {createUser, userGetAll, deleteUser, getUserById,}
