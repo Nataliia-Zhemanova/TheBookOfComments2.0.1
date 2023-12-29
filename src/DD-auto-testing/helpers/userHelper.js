@@ -12,9 +12,9 @@ function createUser(query = userCreateQuery(), variables=userCreateArgs()){
    return requestGql(postData)
 }
 
-function getUserById(userId){
+function getUserById(userId, query = userGetByIdQuery()){
     const postData = {
-        query: userGetByIdQuery,
+        query: userGetByIdQuery(),
         variables: userGetByIdArgs(userId)
     }
     return requestGql(postData)

@@ -71,7 +71,7 @@ describe('get user by id', () => {
             expect(resData.message).include('failed')
         });
 
-        it('wrong schema option', () => {
+        it.skip('wrong schema option', async() => {
 
         });
     });

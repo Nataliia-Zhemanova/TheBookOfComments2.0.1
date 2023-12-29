@@ -3,6 +3,7 @@ const {createUser, getAllUsers} = require("../../helpers/userHelper");
 const {userGetAllArgs} = require("../../helpers/args");
 
 
+// TODO refactor based on args & query functions
 describe('get all users', () => {
     describe('get al users - positive', () => {
         let res
@@ -13,7 +14,7 @@ describe('get all users', () => {
         })
 
     it('verify all users length', async() => {
-        res = await getAllUsers()
+        res = await getAllUsers(4)
         const resBody = res.body.data.usersGetAll
         console.log(resBody.length)
 
