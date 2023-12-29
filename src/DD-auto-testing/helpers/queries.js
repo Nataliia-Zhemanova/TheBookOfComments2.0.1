@@ -10,9 +10,6 @@ function userCreateQuery(id='_id', firstName='firstName', lastName='lastName'){
                         }`
 }
 
-const userDeleteQuery = `mutation UserDeleteById($userId: ID!) {
-                          userDeleteById(userId: $userId)
-                        }`
 
 const userGetByIdQuery = `query UserGetById($userId: ID!) {
                               userGetById(userId: $userId) {
@@ -21,6 +18,13 @@ const userGetByIdQuery = `query UserGetById($userId: ID!) {
                                 lastName
                               }
                             }`
+
+
+const userDeleteQuery = `mutation UserDeleteById($userId: ID!) {
+                          userDeleteById(userId: $userId)
+                        }`
+
+
 
 const userGetAllQuery = `query UsersGetAll($amount: Int) {
                           usersGetAll(amount: $amount) {

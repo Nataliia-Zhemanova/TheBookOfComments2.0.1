@@ -12,6 +12,15 @@ function createUser(query = userCreateQuery(), variables=userCreateArgs()){
    return requestGql(postData)
 }
 
+function getUserById(userId){
+    const postData = {
+        query: userGetByIdQuery,
+        variables: userGetByIdArgs(userId)
+    }
+    return requestGql(postData)
+}
+
+
 function getAllUsers(){
     const postData = {
         query: userGetAllQuery,
@@ -24,14 +33,6 @@ function deleteUser(userId){
     const postData = {
         query: userDeleteQuery,
         variables: userDeleteArgs(userId)
-    }
-    return requestGql(postData)
-}
-
-function getUserById(userId){
-    const postData = {
-        query: userGetByIdQuery,
-        variables: userGetByIdArgs(userId)
     }
     return requestGql(postData)
 }

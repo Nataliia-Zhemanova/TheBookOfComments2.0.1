@@ -2,11 +2,12 @@ const generateId = require('../../../utils/generateId')
 const {expect} = require('chai')
 const {requestGql} = require("../../helpers/generalHelper");
 const {userGetByIdQuery} = require("../../helpers/queries");
-const {userGetByIdArgs, createUserArgs} = require('../../helpers/args')
+const {userGetByIdArgs, userCreateArgs} = require('../../helpers/args')
 const {createUser, getUserById} = require("../../helpers/userHelper");
+// const User = require('../../../modules/user/User') // not sure if this import actually required
 
 describe('get user by id', () => {
-    let res, resData, userId
+    let resCreate, resGet, resData, userId
     describe('get user by id - positive', () => {
         // TODO refactor to async/await and make it work
         // before('delete all users', (done)=>{
@@ -14,25 +15,28 @@ describe('get user by id', () => {
         //     return done()
         // })
         before(async() => {
-            // await User.deleteMany({}) // TODO fix "User is not defined" error
-            res = await createUser()
-            userId  = res.body.data.userCreate._id
-            res = await getUserById(userId)
-            resData = res.body.data.userGetById
+            // await User.deleteMany({}) // TODO fix "User is not defined" error / import User from modules/user ?
+            resCreate = await createUser()
+            userId  = resCreate.body.data.userCreate._id
+            resGet = await getUserById(userId)
+            resData = resGet.body.data.userGetById
+
+            console.log(resCreate.body.data.userCreate)
+            console.log(resData)
         });
         it('verify user id', async() => {
                 expect(resData._id).to.eq(userId)
 
         });
         it('verify user first name', async() => {
-            expect(resData.firstName).to.eq(createUserArgs.userInput.firstName)
+            expect(resData.firstName).to.eq(resCreate.body.data.userCreate.firstName)
         });
         it('verify user last name', async() => {
-            expect(resData.lastName).to.eq(createUserArgs.userInput.lastName)
+            expect(resData.lastName).to.eq(resCreate.body.data.userCreate.lastName)
         });
     })
     describe.skip('get user by id - negative', () => {
-        let userInvalidId, resData
+        let res, userInvalidId, resData
         before(() => {
             userInvalidId = generateId()
         })
