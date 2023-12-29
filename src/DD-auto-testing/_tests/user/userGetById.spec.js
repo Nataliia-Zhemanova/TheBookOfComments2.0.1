@@ -35,7 +35,7 @@ describe('get user by id', () => {
             expect(resData.lastName).to.eq(resCreate.body.data.userCreate.lastName)
         });
     })
-    describe.skip('get user by id - negative', () => {
+    describe('get user by id - negative', () => {
         let res, userInvalidId, resData
         before(() => {
             userInvalidId = generateId()

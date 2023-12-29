@@ -7,7 +7,7 @@ const faker = require("faker");
 
 
 describe('create user', () => {
-    describe('positive', () => {
+    describe('create user - positive', () => {
         let res, resBody, requestBody
         before(async() => {
             res = await createUser()
@@ -24,7 +24,7 @@ describe('create user', () => {
             expect(resBody.lastName).to.eq(requestBody.lastName)
         });
     });
-    describe('negative', () => {
+    describe('create user - negative', () => {
         let res, resBody
         // user can be created with empty fields
         // it('verify user cannot be created w/o first name', async() => {
