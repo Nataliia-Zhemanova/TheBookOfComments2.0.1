@@ -84,7 +84,7 @@ describe ('USER GET BY ID', () => {
                 .end((err, res) => {
                     if(err) return done(err);
                     const respData = res.body.errors[0]
-                    console.log('RESP BODY USER GET BY ID ===', respData);
+                    console.log('RESP BODY USER GET BY ID negativ ===', respData);
                     expect(respData.message).eq('Cannot return null for non-nullable field Query.userGetById.')
                     done()
                 })
