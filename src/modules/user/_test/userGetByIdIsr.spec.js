@@ -40,7 +40,7 @@ describe ('USER GET BY ID', () => {
             .expect(200)
             .end((err, res) => {
                 if(err) return done(err);
-                const respData = res.body.data
+                const respData = res.body.data;
                 console.log('RESP BODY USER GET BY ID ===', respData);
                 expect(respData.userGetById._id).eq(userId)
                 expect(respData.userGetById.firstName).eq(arg.userInput.firstName)
@@ -51,43 +51,79 @@ describe ('USER GET BY ID', () => {
 })
     describe('USER GET BY ID - NEGATIVE', () => {
         let userId = null;
-        before('user delete all', (done) =>{
-            User.deleteMany({})
-            return done()
-        })
-        before('user create', (done) =>{
+        before('user delete all', (done) => {
+            User.deleteMany({});
+            return done();
+        });
+        before('user create', (done) => {
             const postData = {
                 query: userCreateMutation,
-                variables:  arg
+                variables: arg,
             };
             requestGql(postData)
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
-                    const respData = res.body.data
-                    userId = res.body.data.userCreate._id
+                    const respData = res.body.data;
+                    userId = res.body.data.userCreate._id;
                     console.log('RESP BODY ===', respData);
                     console.log('USER ID ===', userId);
-                    done()
-                })
-        })
-        it("user get by non existing id", (done) => {
+                    done();
+                });
+        });
+        it('user get by non existing Id', (done) => {
             const userGet = {
                 userId: generateId(),
             };
             const postData = {
                 query: userGetByIdQ,
-                variables:  userGet
+                variables: userGet,
             };
             requestGql(postData)
                 .expect(200)
                 .end((err, res) => {
-                    if(err) return done(err);
-                    const respData = res.body.errors[0]
-                    console.log('RESP BODY USER GET BY ID negativ ===', respData);
-                    expect(respData.message).eq('Cannot return null for non-nullable field Query.userGetById.')
-                    done()
-                })
-        })
+                    if (err) return done(err);
+                    const respData = res.body.data;
+                    console.log('RESP BODY USER GET BY ID ===', respData);
+                    expect(respData).eq(null);
+                    done();
+                });
+        });
+        it('user Id get by empty string', (done) => {
+            const userGet = {
+                userId: '',
+            };
+            const postData = {
+                query: userGetByIdQ,
+                variables: userGet,
+            };
+            requestGql(postData)
+                .expect(200)
+                .end((err, res) => {
+                    if (err) return done(err);
+                    const respData = res.body.data;
+                    console.log('RESP BODY USER GET BY ID ===', respData);
+                    expect(respData).eq(null);
+                    done();
+                });
+        });
+        it('user get by ID as number', (done) => {
+            const userGet = {
+                userId: 1234567,
+            };
+            const postData = {
+                query: userGetByIdQ,
+                variables: userGet,
+            };
+            requestGql(postData)
+                .expect(200)
+                .end((err, res) => {
+                    if (err) return done(err);
+                    const respData = res.body.data;
+                    console.log('RESP BODY USER GET BY ID ===', respData);
+                    expect(respData).eq(null);
+                    done();
+                });
+        });
     });
-    })
+});

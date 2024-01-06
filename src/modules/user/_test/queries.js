@@ -14,7 +14,8 @@ userGetById(userId: $userId) {
     }
 }`
 const userUpdateByIdMWrong = `mutation UserUpdateById($userInput: UserFields) {
-  userUpdateById(userInput: $userInput) {
+  userUpdateById(userInput: $userInput) `
+
 const userGetAllQ =
     `query UsersGetAll {
         usersGetAll {
