@@ -5,36 +5,39 @@ const userCreateMutation = `mutation UserCreate($userInput: UserItems) {
     lastName
   }
 }`
-
 const userGetByIdQ = `query UserGetById($userId: ID!) {
-    userGetById(userId: $userId) {
+module.exports = {userCreateM}
+userGetById(userId: $userId) {
     _id
       firstName
       lastName
     }
 }`
-
-const userGetAllQ = `query UsersGetAll($amount: Int) {
-  usersGetAll(amount: $amount) {
+const userUpdateByIdMWrong = `mutation UserUpdateById($userInput: UserFields) {
+  userUpdateById(userInput: $userInput) {
+const userGetAllQ =
+    `query UsersGetAll {
+        usersGetAll {
+            _id
+            firstName
+            lastName
+        }
+    }`;
+const userUpdateByIdMutation = `mutation UserUpdateById($userInput: UserFields) {
+  userUpdateById(userInput: $userInput) {
     _id
     firstName
     lastName
   }
 }`
-
-const userUpdateByIdMutation = `mutation UserUpdateById($userInput: UserFields) {
-    userUpdateById(userInput: $userInput) {
-        _id
-        firstName
-        lastName
-    }
-}`
-
-const userDeleteMutationById = `mutation UserDeleteById($userId: ID!) {
-    userDeleteById(userId: $userId)
-}`
-
-
-
-    module.exports ={userCreateMutation, userGetByIdQ, userGetAllQ, userUpdateByIdMutation, userDeleteMutationById}
-
+const errorMassage = [
+    "Cannot read properties of null (reading 'firstName')",//0 - create user with null parameters data
+    "Cannot read properties of undefined (reading 'errors')",//
+    "Cannot return null for non-nullable field Query.userGetById.",
+    `Cast to ObjectId failed for value "" (type string) at path "_id" for model "User"`,//3 - getUserByStringId
+    `Cannot return null for non-nullable field User._id.`,//4 - getUserByWrongId
+    'Variable "$amount" got invalid value " "; Int cannot represent non-integer value: " "'//5 GetAllUsers - empty string input
+    ]
+    
+const nullAmount = null
+module.exports ={nullAmount, errorMassage, userUpdateByIdMutation, userGetAllQ, userUpdateByIdMWrong, userGetByIdQ, userCreateMutation}
